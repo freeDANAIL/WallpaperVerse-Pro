@@ -1,0 +1,3512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WallpaperVerse Pro - Ultimate Wallpaper Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Inter', 'Vazirmatn', sans-serif;
+        }
+        
+        .persian-font {
+            font-family: 'Vazirmatn', 'Inter', sans-serif;
+        }
+        
+        .cyber-font {
+            font-family: 'Inter', 'Vazirmatn', sans-serif;
+            font-weight: 700;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0e4b99 100%);
+            min-height: 100vh;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+        
+        .neon-text {
+            color: #00f5ff;
+            text-shadow: 0 0 10px #00f5ff, 0 0 20px #00f5ff;
+            animation: neon-pulse 2s infinite alternate;
+        }
+        
+        @keyframes neon-pulse {
+            from { text-shadow: 0 0 10px #00f5ff, 0 0 20px #00f5ff; }
+            to { text-shadow: 0 0 20px #00f5ff, 0 0 30px #00f5ff, 0 0 40px #00f5ff; }
+        }
+        
+        .cyber-button {
+            background: linear-gradient(45deg, #00f5ff, #ff0080);
+            border: none;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cyber-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 245, 255, 0.5);
+        }
+        
+        .cyber-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cyber-button:hover::before {
+            left: 100%;
+        }
+        
+        .wallpaper-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wallpaper-card:hover {
+            transform: translateY(-8px);
+            border-color: #00f5ff;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .wallpaper-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0, 245, 255, 0.1), rgba(255, 0, 128, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .wallpaper-card:hover::before {
+            opacity: 1;
+        }
+        
+        .search-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(0, 245, 255, 0.3);
+            border-radius: 15px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #00f5ff;
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+        }
+        
+        .filter-btn {
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            color: #00f5ff;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(45deg, #00f5ff, #ff0080);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(45deg, #00f5ff, #ff0080);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            z-index: 1000;
+            animation: slideInRight 0.5s ease-out;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .modal {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        .admin-panel {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0e4b99 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%2300f5ff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ff0080" stop-opacity="0.05"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>') center/cover;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .masonry-grid {
+            columns: 4;
+            column-gap: 20px;
+        }
+        
+        @media (max-width: 1200px) { .masonry-grid { columns: 3; } }
+        @media (max-width: 768px) { .masonry-grid { columns: 2; } }
+        @media (max-width: 480px) { .masonry-grid { columns: 1; } }
+        
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+        }
+        
+        .loading-spinner {
+            border: 3px solid rgba(0, 245, 255, 0.3);
+            border-top: 3px solid #00f5ff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.95); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.2);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.4);
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes floatBounce {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(1deg); }
+            50% { transform: translateY(-5px) rotate(-1deg); }
+            75% { transform: translateY(-15px) rotate(0.5deg); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .ad-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            animation: pulseGlow 3s ease-in-out infinite;
+            background: linear-gradient(45deg, #ffd700, #ff6b35, #ff006e, #8338ec, #3a86ff);
+            background-size: 400% 400%;
+            animation: pulseGlow 3s ease-in-out infinite, floatBounce 6s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ad-image-container:hover {
+            transform: scale(1.05) rotate(2deg);
+            animation-play-state: paused;
+        }
+
+        .ad-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .ad-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .ad-image-container:hover .ad-close-btn {
+            opacity: 1;
+            transform: scale(1);
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        .ad-close-btn:hover {
+            background: rgba(255, 0, 0, 1);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .ad-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 107, 53, 0.1), rgba(255, 0, 110, 0.1));
+            opacity: 0;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+        }
+
+        .ad-image-container:hover .ad-overlay {
+            opacity: 1;
+        }
+
+        .ad-shimmer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+            border-radius: 15px;
+        }
+        
+        .animate-slideInDown {
+            animation: slideInDown 0.5s ease-out forwards;
+        }
+        
+        .animate-slideInUp {
+            animation: slideInUp 0.5s ease-out forwards;
+        }
+        
+        .animate-slideInRight {
+            animation: slideInRight 0.5s ease-out forwards;
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(255, 0, 128, 0.1));
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 245, 255, 0.2);
+        }
+        
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #9ca3af;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(45deg, #00f5ff, #ff0080);
+            color: white;
+            border-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- Homepage -->
+    <div id="homepage" class="hero-bg min-h-screen flex items-center justify-center relative">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="glass-card p-16 max-w-6xl mx-auto">
+                <h1 class="text-8xl font-black mb-8 cyber-font">
+                    <span class="neon-text">WallpaperVerse</span>
+                    <span class="text-white">Pro</span>
+                </h1>
+                <p class="text-3xl text-gray-300 mb-6">🚀 <span data-translate="ultimate">The Ultimate Wallpaper Experience</span></p>
+                <p class="text-xl text-gray-400 mb-12 max-w-4xl mx-auto">
+                    <span data-translate="description">Discover over 1,000,000 stunning wallpapers in 8K, 4K, and HD quality.</span>
+                    <br>AI-Generated, Gaming, Nature, Space, Abstract, and more!
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+                    <button onclick="enterMainApp()" class="cyber-button px-20 py-8 rounded-3xl text-3xl font-bold">
+                        <i class="fas fa-rocket mr-4"></i>
+                        <span data-translate="explore">Explore Wallpapers</span>
+                    </button>
+                    <button onclick="openLoginModal()" class="cyber-button px-16 py-6 rounded-2xl text-xl bg-purple-600">
+                        <i class="fas fa-user mr-3"></i>
+                        <span data-translate="login">Login</span> / Register
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="stats-card p-6">
+                        <div class="text-4xl font-bold neon-text mb-2">1M+</div>
+                        <p class="text-gray-400">Wallpapers</p>
+                    </div>
+                    <div class="stats-card p-6">
+                        <div class="text-4xl font-bold text-pink-400 mb-2">500K+</div>
+                        <p class="text-gray-400">Downloads</p>
+                    </div>
+                    <div class="stats-card p-6">
+                        <div class="text-4xl font-bold text-green-400 mb-2">50K+</div>
+                        <p class="text-gray-400">Users</p>
+                    </div>
+                    <div class="stats-card p-6">
+                        <div class="text-4xl font-bold text-yellow-400 mb-2">24/7</div>
+                        <p class="text-gray-400">Updates</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainApp" class="hidden min-h-screen">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full z-50 glass-card backdrop-blur-xl">
+            <div class="container mx-auto px-4 py-2">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-gradient-to-r from-cyan-400 to-pink-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-infinity text-white text-sm"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-lg font-bold neon-text cyber-font">WallpaperVerse</h1>
+                            <p class="text-xs text-gray-400 cyber-font hidden sm:block">Pro 2024</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-2 flex-1 max-w-2xl mx-4">
+                        <input type="text" placeholder="Search wallpapers..." class="search-input px-4 py-2 flex-1 text-sm" id="searchInput">
+                        <select id="languageSelectorMain" onchange="changeLanguage()" class="search-input px-2 py-2 rounded-lg text-xs">
+                            <option value="en">🇺🇸</option>
+                            <option value="fa">🇮🇷</option>
+                            <option value="es">🇪🇸</option>
+                            <option value="fr">🇫🇷</option>
+                            <option value="de">🇩🇪</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-center space-x-2">
+                        <button onclick="goToHomepage()" id="homeBtn" class="cyber-button px-3 py-2 rounded-lg bg-gray-600 text-sm">
+                            <i class="fas fa-home"></i>
+                            <span class="hidden sm:inline ml-1" data-translate="home">Home</span>
+                        </button>
+                        <button onclick="openAdminPanel()" id="dashboardBtn" class="hidden cyber-button px-3 py-2 rounded-lg bg-purple-600 text-sm">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span class="hidden sm:inline ml-1">Dashboard</span>
+                        </button>
+                        <button onclick="openLoginModal()" id="loginBtn" class="cyber-button px-3 py-2 rounded-lg text-sm">
+                            <i class="fas fa-user"></i>
+                            <span class="hidden sm:inline ml-1" data-translate="login">Login</span>
+                        </button>
+                        <button onclick="logout()" id="logoutBtn" class="hidden cyber-button px-3 py-2 rounded-lg bg-red-600 text-sm">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span class="hidden sm:inline ml-1" data-translate="logout">Logout</span>
+                        </button>
+                        <button onclick="openAdminPanel()" id="adminBtn" class="hidden cyber-button px-3 py-2 rounded-lg bg-purple-600 text-sm">
+                            <i class="fas fa-cog"></i>
+                            <span class="hidden sm:inline ml-1" data-translate="admin">Admin</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Advanced Filters Section -->
+        <section class="pt-24 pb-8 border-b border-gray-800">
+            <div class="container mx-auto px-6">
+                <div class="glass-card p-6">
+                    <h2 class="text-2xl font-bold text-white mb-6 cyber-font">Advanced Filters</h2>
+                    
+                    <!-- Category Filters -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-300 mb-3"><span data-translate="categories">Categories</span></h3>
+                        <div class="flex flex-wrap gap-3">
+                            <button class="filter-btn active px-4 py-2" onclick="filterCategory('all')"><span data-translate="all">All</span></button>
+                            <button class="filter-btn px-4 py-2" onclick="filterCategory('gaming')"><span data-translate="gaming">Gaming</span></button>
+                            <button class="filter-btn px-4 py-2" onclick="filterCategory('nature')"><span data-translate="nature">Nature</span></button>
+                            <button class="filter-btn px-4 py-2" onclick="filterCategory('space')"><span data-translate="space">Space</span></button>
+                            <button class="filter-btn px-4 py-2" onclick="filterCategory('ai')"><span data-translate="ai">AI Art</span></button>
+                            <button class="filter-btn px-4 py-2" onclick="filterCategory('abstract')"><span data-translate="abstract">Abstract</span></button>
+                            <button class="filter-btn px-4 py-2" onclick="filterCategory('anime')"><span data-translate="anime">Anime</span></button>
+                            <button class="filter-btn px-4 py-2" onclick="filterCategory('cars')"><span data-translate="cars">Cars</span></button>
+                            <button class="filter-btn px-4 py-2" onclick="filterCategory('cyberpunk')"><span data-translate="cyberpunk">Cyberpunk</span></button>
+                            <button class="filter-btn px-4 py-2" onclick="filterCategory('fantasy')"><span data-translate="fantasy">Fantasy</span></button>
+                            <button class="filter-btn px-4 py-2" onclick="filterCategory('minimalist')"><span data-translate="minimalist">Minimalist</span></button>
+                            <button class="filter-btn px-4 py-2" onclick="filterCategory('dark')"><span data-translate="dark">Dark</span></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Quality & Resolution Filters -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                        <div>
+                            <label class="block text-gray-300 mb-2">Quality</label>
+                            <select class="search-input w-full px-4 py-2" id="qualityFilter">
+                                <option value="all">All Qualities</option>
+                                <option value="8k">8K Ultra (7680×4320)</option>
+                                <option value="4k">4K Premium (3840×2160)</option>
+                                <option value="2k">2K HD (2560×1440)</option>
+                                <option value="fhd">Full HD (1920×1080)</option>
+                                <option value="mobile">Mobile (1080×1920)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-2">Aspect Ratio</label>
+                            <select class="search-input w-full px-4 py-2" id="aspectFilter">
+                                <option value="all">All Ratios</option>
+                                <option value="16:9">16:9 (Widescreen)</option>
+                                <option value="21:9">21:9 (Ultrawide)</option>
+                                <option value="9:16">9:16 (Mobile)</option>
+                                <option value="1:1">1:1 (Square)</option>
+                                <option value="4:3">4:3 (Classic)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-2">Color Scheme</label>
+                            <select class="search-input w-full px-4 py-2" id="colorFilter">
+                                <option value="all">All Colors</option>
+                                <option value="dark">Dark Theme</option>
+                                <option value="light">Light Theme</option>
+                                <option value="colorful">Colorful</option>
+                                <option value="monochrome">Monochrome</option>
+                                <option value="neon">Neon</option>
+                                <option value="pastel">Pastel</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-2">Sort By</label>
+                            <select class="search-input w-full px-4 py-2" id="sortFilter">
+                                <option value="newest">Newest First</option>
+                                <option value="popular">Most Popular</option>
+                                <option value="downloads">Most Downloaded</option>
+                                <option value="likes">Most Liked</option>
+                                <option value="trending">Trending</option>
+                                <option value="random">Random</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Filters -->
+                    <div class="flex flex-wrap gap-4 items-center">
+                        <label class="flex items-center space-x-2 text-gray-300">
+                            <input type="checkbox" id="aiOnlyFilter" class="rounded">
+                            <span>AI Generated Only</span>
+                        </label>
+                        <label class="flex items-center space-x-2 text-gray-300">
+                            <input type="checkbox" id="premiumOnlyFilter" class="rounded">
+                            <span>Premium Only</span>
+                        </label>
+                        <label class="flex items-center space-x-2 text-gray-300">
+                            <input type="checkbox" id="animatedFilter" class="rounded">
+                            <span>Animated</span>
+                        </label>
+                        <button onclick="clearAllFilters()" class="cyber-button px-4 py-2 rounded-lg bg-gray-600">
+                            <i class="fas fa-refresh mr-2"></i>Clear Filters
+                        </button>
+                        <button onclick="applyFilters()" class="cyber-button px-6 py-2 rounded-lg">
+                            <i class="fas fa-filter mr-2"></i>Apply Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-8">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+                    <div class="stats-card p-4 text-center">
+                        <div class="text-2xl font-bold neon-text mb-1" id="totalWallpapers">0</div>
+                        <p class="text-gray-400 text-sm">Total</p>
+                    </div>
+                    <div class="stats-card p-4 text-center">
+                        <div class="text-2xl font-bold text-pink-400 mb-1" id="dailyDownloads">0</div>
+                        <p class="text-gray-400 text-sm">Downloads</p>
+                    </div>
+                    <div class="stats-card p-4 text-center">
+                        <div class="text-2xl font-bold text-green-400 mb-1" id="totalLikes">0</div>
+                        <p class="text-gray-400 text-sm">Likes</p>
+                    </div>
+                    <div class="stats-card p-4 text-center">
+                        <div class="text-2xl font-bold text-yellow-400 mb-1" id="aiGenerated">0</div>
+                        <p class="text-gray-400 text-sm">AI Art</p>
+                    </div>
+                    <div class="stats-card p-4 text-center">
+                        <div class="text-2xl font-bold text-purple-400 mb-1">2,847</div>
+                        <p class="text-gray-400 text-sm">Online</p>
+                    </div>
+                    <div class="stats-card p-4 text-center">
+                        <div class="text-2xl font-bold text-blue-400 mb-1" id="newToday">0</div>
+                        <p class="text-gray-400 text-sm">New Today</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wallpapers Grid -->
+        <section class="py-8">
+            <div class="container mx-auto px-6">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold text-white cyber-font">Premium Wallpapers</h2>
+                    <div class="flex space-x-4">
+                        <button onclick="toggleViewMode()" class="cyber-button px-4 py-2 rounded-lg" id="viewToggle">
+                            <i class="fas fa-th mr-2"></i>Grid View
+                        </button>
+                        <button onclick="loadMoreWallpapers()" class="cyber-button px-6 py-2 rounded-lg">
+                            <i class="fas fa-plus mr-2"></i>Load More
+                        </button>
+                        <button onclick="generateRandomWallpapers()" class="cyber-button px-4 py-2 rounded-lg bg-purple-600">
+                            <i class="fas fa-random mr-2"></i>Random
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Loading -->
+                <div id="loading" class="text-center py-20 hidden">
+                    <div class="loading-spinner mx-auto mb-4"></div>
+                    <p class="text-gray-400">Loading amazing wallpapers...</p>
+                </div>
+                
+                <!-- Grid -->
+                <div class="masonry-grid" id="wallpapersGrid">
+                    <!-- Wallpapers will be loaded here -->
+                </div>
+                
+                <!-- Load More Button -->
+                <div class="text-center mt-12">
+                    <button onclick="loadMoreWallpapers()" class="cyber-button px-12 py-4 rounded-xl text-lg">
+                        <i class="fas fa-plus mr-3"></i>Load More Amazing Wallpapers
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 modal hidden items-center justify-center z-50">
+        <div class="glass-card p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-gradient-to-r from-cyan-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user text-white text-2xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold neon-text mb-2">Welcome to WallpaperVerse</h2>
+                <p class="text-gray-400">Join the ultimate wallpaper community</p>
+            </div>
+            
+            <form onsubmit="handleLogin(event)" class="space-y-6">
+                <div>
+                    <input type="email" id="loginEmail" required placeholder="Email Address" class="search-input w-full px-6 py-3 rounded-lg">
+                </div>
+                <div>
+                    <input type="password" id="loginPassword" required placeholder="Password" class="search-input w-full px-6 py-3 rounded-lg">
+                </div>
+                <button type="submit" class="cyber-button w-full py-3 rounded-lg text-lg">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Login / Register
+                </button>
+            </form>
+            
+            <div class="text-center mt-6">
+                <p class="text-gray-400 text-sm">
+                    Don't have an account? Just enter your email and password to create one!
+                </p>
+            </div>
+            
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Wallpaper Detail Modal -->
+    <div id="wallpaperModal" class="fixed inset-0 modal hidden items-center justify-center z-50">
+        <div class="glass-card p-8 max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div id="wallpaperContent">
+                <!-- Content will be loaded here -->
+            </div>
+            <button onclick="closeWallpaperModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div id="previewModal" class="fixed inset-0 modal hidden items-center justify-center z-50">
+        <div class="glass-card p-8 max-w-4xl w-full mx-4">
+            <div id="previewContent">
+                <!-- Preview content will be loaded here -->
+            </div>
+            <button onclick="closePreviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="fixed inset-0 admin-panel hidden z-50 overflow-y-auto">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex justify-between items-center mb-8">
+                <div class="persian-font">
+                    <h1 class="text-4xl font-bold neon-text">داشبورد مدیریت پیشرفته</h1>
+                    <p class="text-gray-400">کنترل کامل بر والپیپرورس پرو</p>
+                </div>
+                <button onclick="closeAdminPanel()" class="cyber-button px-6 py-3 rounded-lg persian-font">
+                    <i class="fas fa-times mr-2"></i>بستن
+                </button>
+            </div>
+            
+            <!-- Admin Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8 persian-font">
+                <div class="stats-card p-6 text-center">
+                    <div class="text-3xl font-bold text-cyan-400 mb-2" id="adminTotalUsers">0</div>
+                    <p class="text-gray-400">کل کاربران</p>
+                </div>
+                <div class="stats-card p-6 text-center">
+                    <div class="text-3xl font-bold text-pink-400 mb-2" id="adminTotalWallpapers">0</div>
+                    <p class="text-gray-400">والپیپرها</p>
+                </div>
+                <div class="stats-card p-6 text-center">
+                    <div class="text-3xl font-bold text-green-400 mb-2" id="adminTotalDownloads">0</div>
+                    <p class="text-gray-400">دانلودها</p>
+                </div>
+                <div class="stats-card p-6 text-center">
+                    <div class="text-3xl font-bold text-yellow-400 mb-2" id="adminTotalAds">0</div>
+                    <p class="text-gray-400">تبلیغات</p>
+                </div>
+                <div class="stats-card p-6 text-center">
+                    <div class="text-3xl font-bold text-purple-400 mb-2" id="adminRevenue">$0</div>
+                    <p class="text-gray-400">درآمد</p>
+                </div>
+            </div>
+            
+            <!-- Admin Tabs -->
+            <div class="glass-card p-6 persian-font">
+                <div class="flex flex-wrap space-x-4 mb-6 border-b border-gray-700">
+                    <button onclick="showAdminTab('wallpapers')" class="tab-btn active px-6 py-3 rounded-lg">
+                        <i class="fas fa-images mr-2"></i>والپیپرها
+                    </button>
+                    <button onclick="showAdminTab('ads')" class="tab-btn px-6 py-3 rounded-lg">
+                        <i class="fas fa-ad mr-2"></i>تبلیغات
+                    </button>
+                    <button onclick="showAdminTab('users')" class="tab-btn px-6 py-3 rounded-lg">
+                        <i class="fas fa-users mr-2"></i>کاربران
+                    </button>
+                    <button onclick="showAdminTab('analytics')" class="tab-btn px-6 py-3 rounded-lg">
+                        <i class="fas fa-chart-line mr-2"></i>آمار و تحلیل
+                    </button>
+                    <button onclick="showAdminTab('settings')" class="tab-btn px-6 py-3 rounded-lg">
+                        <i class="fas fa-cog mr-2"></i>تنظیمات
+                    </button>
+                </div>
+                
+                <div id="adminContent">
+                    <!-- Admin content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global Variables
+        let wallpapers = [];
+        let currentUser = null;
+        let isAdmin = false;
+        let currentCategory = 'all';
+        let advertisements = [];
+        let users = [];
+        let totalWallpapers = 0;
+        let dailyDownloads = 0;
+        let totalLikes = 0;
+        let aiGenerated = 0;
+        let newToday = 0;
+        let userLikes = JSON.parse(localStorage.getItem('wallpaperverse_user_likes') || '{}');
+        let viewMode = 'masonry';
+        let currentLanguage = localStorage.getItem('wallpaperverse_language') || 'en';
+        let currentFilters = {
+            category: 'all',
+            quality: 'all',
+            aspect: 'all',
+            color: 'all',
+            sort: 'newest',
+            aiOnly: false,
+            premiumOnly: false,
+            animated: false
+        };
+
+        // Language translations
+        const translations = {
+            en: {
+                home: 'Home',
+                back: 'Back',
+                search: 'Search wallpapers...',
+                login: 'Login',
+                logout: 'Logout',
+                admin: 'Admin',
+                explore: 'Explore Wallpapers',
+                welcome: 'Welcome to WallpaperVerse',
+                ultimate: 'The Ultimate Wallpaper Experience',
+                description: 'Discover over 1,000,000 stunning wallpapers in 8K, 4K, and HD quality.',
+                categories: 'Categories',
+                all: 'All',
+                gaming: 'Gaming',
+                nature: 'Nature',
+                space: 'Space',
+                ai: 'AI Art',
+                abstract: 'Abstract',
+                anime: 'Anime',
+                cars: 'Cars',
+                cyberpunk: 'Cyberpunk',
+                fantasy: 'Fantasy',
+                minimalist: 'Minimalist',
+                dark: 'Dark'
+            },
+            fa: {
+                home: 'خانه',
+                back: 'بازگشت',
+                search: 'جستجوی والپیپر...',
+                login: 'ورود',
+                logout: 'خروج',
+                admin: 'مدیریت',
+                explore: 'کاوش والپیپرها',
+                welcome: 'به والپیپرورس خوش آمدید',
+                ultimate: 'بهترین تجربه والپیپر',
+                description: 'بیش از ۱،۰۰۰،۰۰۰ والپیپر خیره‌کننده در کیفیت ۸K، ۴K و HD کشف کنید.',
+                categories: 'دسته‌بندی‌ها',
+                all: 'همه',
+                gaming: 'بازی',
+                nature: 'طبیعت',
+                space: 'فضا',
+                ai: 'هنر هوش مصنوعی',
+                abstract: 'انتزاعی',
+                anime: 'انیمه',
+                cars: 'ماشین',
+                cyberpunk: 'سایبرپانک',
+                fantasy: 'فانتزی',
+                minimalist: 'مینیمال',
+                dark: 'تاریک',
+                shareMessage: 'اگه از عکس خوشت اومد میتونی با دوستات به اشتراک بزاری',
+                linkCopied: 'لینک کپی شد!',
+                dashboard: 'داشبورد مدیریت',
+                wallpaperManagement: 'مدیریت والپیپرها',
+                userManagement: 'مدیریت کاربران',
+                adManagement: 'مدیریت تبلیغات',
+                analytics: 'آمار و تحلیل',
+                settings: 'تنظیمات',
+                totalUsers: 'کل کاربران',
+                totalWallpapers: 'کل والپیپرها',
+                totalDownloads: 'کل دانلودها',
+                totalAds: 'کل تبلیغات',
+                revenue: 'درآمد',
+                refresh: 'بروزرسانی',
+                addWallpaper: 'افزودن والپیپر',
+                addAd: 'افزودن تبلیغ',
+                edit: 'ویرایش',
+                delete: 'حذف',
+                save: 'ذخیره',
+                cancel: 'لغو',
+                close: 'بستن'
+            },
+            es: {
+                home: 'Inicio',
+                back: 'Atrás',
+                search: 'Buscar fondos...',
+                login: 'Iniciar sesión',
+                logout: 'Cerrar sesión',
+                admin: 'Admin',
+                explore: 'Explorar Fondos',
+                welcome: 'Bienvenido a WallpaperVerse',
+                ultimate: 'La Experiencia Definitiva de Fondos',
+                description: 'Descubre más de 1,000,000 fondos impresionantes en calidad 8K, 4K y HD.',
+                categories: 'Categorías',
+                all: 'Todos',
+                gaming: 'Juegos',
+                nature: 'Naturaleza',
+                space: 'Espacio',
+                ai: 'Arte IA',
+                abstract: 'Abstracto',
+                anime: 'Anime',
+                cars: 'Coches',
+                cyberpunk: 'Cyberpunk',
+                fantasy: 'Fantasía',
+                minimalist: 'Minimalista',
+                dark: 'Oscuro'
+            },
+            fr: {
+                home: 'Accueil',
+                back: 'Retour',
+                search: 'Rechercher des fonds...',
+                login: 'Connexion',
+                logout: 'Déconnexion',
+                admin: 'Admin',
+                explore: 'Explorer les Fonds',
+                welcome: 'Bienvenue sur WallpaperVerse',
+                ultimate: 'L\'Expérience Ultime des Fonds d\'Écran',
+                description: 'Découvrez plus de 1 000 000 fonds d\'écran époustouflants en qualité 8K, 4K et HD.',
+                categories: 'Catégories',
+                all: 'Tous',
+                gaming: 'Jeux',
+                nature: 'Nature',
+                space: 'Espace',
+                ai: 'Art IA',
+                abstract: 'Abstrait',
+                anime: 'Anime',
+                cars: 'Voitures',
+                cyberpunk: 'Cyberpunk',
+                fantasy: 'Fantaisie',
+                minimalist: 'Minimaliste',
+                dark: 'Sombre'
+            },
+            de: {
+                home: 'Startseite',
+                back: 'Zurück',
+                search: 'Hintergrunde suchen...',
+                login: 'Anmelden',
+                logout: 'Abmelden',
+                admin: 'Admin',
+                explore: 'Hintergrunde Erkunden',
+                welcome: 'Willkommen bei WallpaperVerse',
+                ultimate: 'Das Ultimative Hintergrundbild-Erlebnis',
+                description: 'Entdecken Sie über 1.000.000 atemberaubende Hintergrundbilder in 8K-, 4K- und HD-Qualität.',
+                categories: 'Kategorien',
+                all: 'Alle',
+                gaming: 'Gaming',
+                nature: 'Natur',
+                space: 'Weltraum',
+                ai: 'KI-Kunst',
+                abstract: 'Abstrakt',
+                anime: 'Anime',
+                cars: 'Autos',
+                cyberpunk: 'Cyberpunk',
+                fantasy: 'Fantasy',
+                minimalist: 'Minimalistisch',
+                dark: 'Dunkel'
+            }
+        };
+
+        function changeLanguage() {
+            const selector = document.getElementById('languageSelector') || document.getElementById('languageSelectorMain');
+            currentLanguage = selector.value;
+            localStorage.setItem('wallpaperverse_language', currentLanguage);
+            
+            // Sync both selectors
+            const homeSelector = document.getElementById('languageSelector');
+            const mainSelector = document.getElementById('languageSelectorMain');
+            if (homeSelector) homeSelector.value = currentLanguage;
+            if (mainSelector) mainSelector.value = currentLanguage;
+            
+            // Apply RTL for Persian
+            if (currentLanguage === 'fa') {
+                document.body.classList.add('rtl');
+                document.documentElement.setAttribute('dir', 'rtl');
+            } else {
+                document.body.classList.remove('rtl');
+                document.documentElement.setAttribute('dir', 'ltr');
+            }
+            
+            // Update all translatable elements
+            updateTranslations();
+            
+            const languageNames = {
+                'en': '🇺🇸 English',
+                'fa': '🇮🇷 فارسی', 
+                'es': '🇪🇸 Español',
+                'fr': '🇫🇷 Français',
+                'de': '🇩🇪 Deutsch'
+            };
+            
+            showNotification(`🌍 ${translations[currentLanguage]?.languageChanged || 'Language changed to'} ${languageNames[currentLanguage]}`, 'success');
+        }
+
+        function updateTranslations() {
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+            
+            // Update placeholders
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput && translations[currentLanguage] && translations[currentLanguage].search) {
+                searchInput.placeholder = translations[currentLanguage].search;
+            }
+        }
+
+
+
+        // Helper function for position text
+        function getPositionText(position) {
+            const positions = {
+                'header': 'بالای صفحه',
+                'sidebar': 'کنار صفحه', 
+                'footer': 'پایین صفحه',
+                'between': 'بین والپیپرها',
+                'popup': 'پاپ آپ',
+                'banner': 'بنر'
+            };
+            return positions[position] || position;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+        });
+
+        function initializeApp() {
+            checkLoginStatus();
+            loadUsers();
+            loadAds();
+            updateStats();
+            
+            // Load saved language
+            const homeSelector = document.getElementById('languageSelector');
+            const mainSelector = document.getElementById('languageSelectorMain');
+            if (homeSelector) homeSelector.value = currentLanguage;
+            if (mainSelector) mainSelector.value = currentLanguage;
+            
+            if (currentLanguage === 'fa') {
+                document.body.classList.add('rtl');
+                document.documentElement.setAttribute('dir', 'rtl');
+            }
+            updateTranslations();
+            
+            // Add event listeners
+            document.getElementById('searchInput').addEventListener('input', handleSearch);
+            document.getElementById('qualityFilter').addEventListener('change', updateFilters);
+            document.getElementById('aspectFilter').addEventListener('change', updateFilters);
+            document.getElementById('colorFilter').addEventListener('change', updateFilters);
+            document.getElementById('sortFilter').addEventListener('change', updateFilters);
+            document.getElementById('aiOnlyFilter').addEventListener('change', updateFilters);
+            document.getElementById('premiumOnlyFilter').addEventListener('change', updateFilters);
+            document.getElementById('animatedFilter').addEventListener('change', updateFilters);
+            
+            // Start ad expiry checker
+            setInterval(checkExpiredAds, 60000); // Check every minute
+            
+            // Initialize individual ad timers
+            setTimeout(() => {
+                displayAds();
+            }, 1000);
+        }
+
+        function enterMainApp() {
+            document.getElementById('homepage').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+            showNotification('🚀 Welcome to WallpaperVerse Pro!', 'success');
+            
+            setTimeout(() => {
+                loadInitialWallpapers();
+                displayAds(); // Show ads when entering main app
+            }, 1000);
+        }
+
+        function goToHomepage() {
+            document.getElementById('mainApp').classList.add('hidden');
+            document.getElementById('homepage').classList.remove('hidden');
+        }
+
+        // Ultimate Premium Wallpaper Generation System - World's Highest Quality Images
+        function generateUniqueWallpaper() {
+            const categories = ['gaming', 'nature', 'space', 'ai', 'abstract', 'anime', 'cars', 'cyberpunk', 'fantasy', 'minimalist', 'dark'];
+            const qualities = ['8K', '4K', '2K', 'FHD'];
+            const colors = ['dark', 'light', 'colorful', 'monochrome', 'neon', 'pastel'];
+            
+            const today = new Date().toDateString();
+            const timestamp = Date.now();
+            const randomId = Math.floor(Math.random() * 999999);
+            const category = categories[Math.floor(Math.random() * categories.length)];
+            const quality = qualities[Math.floor(Math.random() * qualities.length)];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            const dimensions = {
+                '8K': { width: 7680, height: 4320 },
+                '4K': { width: 3840, height: 2160 },
+                '2K': { width: 2560, height: 1440 },
+                'FHD': { width: 1920, height: 1080 }
+            };
+            
+            const dim = dimensions[quality];
+            const isAI = Math.random() > 0.6;
+            const isPremium = Math.random() > 0.7;
+            
+            // World's Highest Quality Image Sources - Professional Grade
+            const worldClassImageProviders = [
+                // Unsplash - World's Best Photography Platform
+                `https://source.unsplash.com/${dim.width}x${dim.height}/?${category},wallpaper,${quality},premium&sig=${randomId}`,
+                `https://source.unsplash.com/${dim.width}x${dim.height}/?${category},ultra,hd,professional&sig=${timestamp}`,
+                `https://source.unsplash.com/${dim.width}x${dim.height}/?wallpaper,${category},stunning,${color}&sig=${randomId + timestamp}`,
+                `https://source.unsplash.com/${dim.width}x${dim.height}/?${category},desktop,background,${quality}&sig=${Math.floor(Math.random() * 999999)}`,
+                `https://source.unsplash.com/${dim.width}x${dim.height}/?premium,${category},wallpaper,ultra&sig=${Date.now()}`,
+                
+                // Picsum Photos - High Quality Random Images
+                `https://picsum.photos/${dim.width}/${dim.height}?random=${randomId}&blur=0&grayscale=0`,
+                `https://picsum.photos/seed/${category}${randomId}/${dim.width}/${dim.height}`,
+                `https://picsum.photos/seed/premium${timestamp}/${dim.width}/${dim.height}`,
+                `https://picsum.photos/seed/${quality}ultra${randomId}/${dim.width}/${dim.height}`,
+                `https://picsum.photos/seed/wallpaper${category}${timestamp}/${dim.width}/${dim.height}`,
+                
+                // Lorem Picsum with specific IDs for consistent quality
+                `https://picsum.photos/id/${Math.floor(Math.random() * 1000) + 1}/${dim.width}/${dim.height}`,
+                `https://picsum.photos/id/${Math.floor(Math.random() * 500) + 500}/${dim.width}/${dim.height}`,
+                `https://picsum.photos/id/${Math.floor(Math.random() * 200) + 800}/${dim.width}/${dim.height}`,
+                
+                // More Unsplash variations with specific themes
+                `https://source.unsplash.com/${dim.width}x${dim.height}/?${category},4k,wallpaper,desktop&sig=${randomId}`,
+                `https://source.unsplash.com/${dim.width}x${dim.height}/?nature,landscape,${quality},stunning&sig=${timestamp}`,
+                `https://source.unsplash.com/${dim.width}x${dim.height}/?abstract,digital,art,${color}&sig=${randomId + 100}`,
+                `https://source.unsplash.com/${dim.width}x${dim.height}/?space,galaxy,stars,universe&sig=${timestamp + 200}`,
+                `https://source.unsplash.com/${dim.width}x${dim.height}/?gaming,technology,cyber,neon&sig=${randomId + 300}`,
+                `https://source.unsplash.com/${dim.width}x${dim.height}/?anime,art,illustration,digital&sig=${timestamp + 400}`,
+                `https://source.unsplash.com/${dim.width}x${dim.height}/?car,automotive,luxury,speed&sig=${randomId + 500}`,
+                
+                // Professional Photography Collections
+                `https://source.unsplash.com/collection/1319040/${dim.width}x${dim.height}/?sig=${randomId}`, // Wallpapers collection
+                `https://source.unsplash.com/collection/3178572/${dim.width}x${dim.height}/?sig=${timestamp}`, // Abstract collection
+                `https://source.unsplash.com/collection/1114848/${dim.width}x${dim.height}/?sig=${randomId + timestamp}`, // Nature collection
+                
+                // High-res Picsum with specific parameters
+                `https://picsum.photos/${dim.width}/${dim.height}?random=${timestamp}&quality=100`,
+                `https://picsum.photos/${dim.width}/${dim.height}?random=${randomId}&quality=95&contrast=1.2`,
+                `https://picsum.photos/${dim.width}/${dim.height}?random=${Date.now()}&quality=100&saturation=1.1`
+            ];
+            const imageUrl = worldClassImageProviders[Math.floor(Math.random() * worldClassImageProviders.length)];
+            
+            return {
+                id: timestamp + randomId,
+                title: `${category.charAt(0).toUpperCase() + category.slice(1)} ${quality} ${isAI ? 'AI' : 'Pro'}`,
+                category: category,
+                quality: quality,
+                color: color,
+                url: imageUrl,
+                width: dim.width,
+                height: dim.height,
+                aspectRatio: (dim.width / dim.height).toFixed(2),
+                downloads: Math.floor(Math.random() * 50000) + 1000,
+                likes: Math.floor(Math.random() * 25000) + 500,
+                views: Math.floor(Math.random() * 100000) + 5000,
+                isAI: isAI,
+                isPremium: isPremium,
+                isAnimated: Math.random() > 0.9,
+                uploadDate: new Date().toLocaleDateString(),
+                tags: [category, quality, color, isAI ? 'ai' : 'digital'],
+                aiScore: isAI ? Math.floor(Math.random() * 40) + 60 : 0,
+                createdAt: timestamp
+            };
+        }
+
+        function loadInitialWallpapers() {
+            showLoading(true);
+            
+            setTimeout(() => {
+                // Generate 40 unique ultra-premium wallpapers
+                for (let i = 0; i < 40; i++) {
+                    const wallpaper = generateUniqueWallpaper();
+                    wallpapers.push(wallpaper);
+                    addWallpaperToGrid(wallpaper);
+                }
+                
+                updateStats();
+                showLoading(false);
+                showNotification('🌟 40 ultra-premium wallpapers from world\'s best sources loaded!', 'success');
+            }, 2000);
+        }
+
+        function addWallpaperToGrid(wallpaper) {
+            const grid = document.getElementById('wallpapersGrid');
+            const wallpaperElement = document.createElement('div');
+            wallpaperElement.className = 'masonry-item';
+            
+            const randomHeight = Math.floor(Math.random() * 150) + 250;
+            
+            wallpaperElement.innerHTML = `
+                <div class="wallpaper-card group cursor-pointer" onclick="openWallpaperDetail('${wallpaper.id}')">
+                    <div class="relative overflow-hidden rounded-t-lg">
+                        <!-- Loading placeholder -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center" style="height: ${randomHeight}px;">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        
+                        <img src="${wallpaper.url}" alt="${wallpaper.title}" 
+                             class="w-full object-cover transition-transform duration-300 group-hover:scale-105 relative z-10" 
+                             style="height: ${randomHeight}px; opacity: 0; transition: opacity 0.3s ease;" loading="lazy"
+                             onload="this.style.opacity='1'; this.previousElementSibling.style.display='none';"
+                             onerror="handleGridImageError(this, '${wallpaper.id}')"
+                        
+                        <!-- Top Badges -->
+                        <div class="absolute top-3 right-3 space-y-2">
+                            <span class="bg-gradient-to-r from-cyan-400 to-pink-500 text-white text-xs px-3 py-1 rounded-full font-bold">
+                                ${wallpaper.quality}
+                            </span>
+                            ${wallpaper.isAI ? '<span class="bg-purple-600 text-white text-xs px-3 py-1 rounded-full">🤖 AI</span>' : ''}
+                            ${wallpaper.isPremium ? '<span class="bg-yellow-500 text-black text-xs px-3 py-1 rounded-full">⭐ Premium</span>' : ''}
+                            ${wallpaper.isAnimated ? '<span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full">🎬 Animated</span>' : ''}
+                        </div>
+                        
+                        <!-- Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        
+                        <!-- Bottom Info -->
+                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="font-bold text-lg mb-2">${wallpaper.title}</h3>
+                            <div class="flex justify-between items-center text-sm mb-3">
+                                <div class="flex items-center space-x-4">
+                                    <span><i class="fas fa-download mr-1"></i>${wallpaper.downloads.toLocaleString()}</span>
+                                    <span><i class="fas fa-heart mr-1"></i>${wallpaper.likes.toLocaleString()}</span>
+                                    <span><i class="fas fa-eye mr-1"></i>${wallpaper.views.toLocaleString()}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Click to view overlay -->
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+                        <div class="transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                            <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-full p-4">
+                                <i class="fas fa-expand text-white text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            grid.appendChild(wallpaperElement);
+        }
+
+        function previewWallpaper(wallpaperId) {
+            const wallpaper = wallpapers.find(w => w.id == wallpaperId);
+            if (!wallpaper) return;
+            
+            const content = document.getElementById('previewContent');
+            content.innerHTML = `
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold neon-text mb-6">Wallpaper Preview</h2>
+                    <img src="${wallpaper.url}" alt="${wallpaper.title}" class="w-full max-h-96 object-cover rounded-xl mb-6">
+                    
+                    <div class="glass-card p-6 mb-6">
+                        <h3 class="text-xl font-bold text-white mb-4">How to Save This Wallpaper</h3>
+                        <div class="text-left space-y-3 text-gray-300">
+                            <p><strong>Desktop:</strong> Right-click on the image → "Save image as..." → Choose location</p>
+                            <p><strong>Mobile:</strong> Long press on the image → "Save to Photos" or "Download image"</p>
+                            <p><strong>Set as Wallpaper:</strong> After saving, go to Settings → Wallpaper → Choose the image</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center space-x-4">
+                        <button onclick="downloadWallpaper('${wallpaper.id}')" class="cyber-button px-8 py-3 rounded-xl">
+                            <i class="fas fa-download mr-2"></i>Download Now
+                        </button>
+                        <button onclick="closePreviewModal()" class="cyber-button px-6 py-3 rounded-xl bg-gray-600">
+                            <i class="fas fa-times mr-2"></i>Close
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('previewModal').classList.remove('hidden');
+            document.getElementById('previewModal').classList.add('flex');
+            
+            wallpaper.views++;
+            updateStats();
+        }
+
+        function closePreviewModal() {
+            document.getElementById('previewModal').classList.add('hidden');
+            document.getElementById('previewModal').classList.remove('flex');
+        }
+
+        function likeWallpaper(wallpaperId) {
+            const wallpaper = wallpapers.find(w => w.id == wallpaperId);
+            if (!wallpaper) return;
+            
+            const userId = currentUser ? currentUser.id : 'guest';
+            const likeKey = `${userId}_${wallpaperId}`;
+            
+            if (userLikes[likeKey]) {
+                showNotification('❌ You already liked this wallpaper!', 'warning');
+                return;
+            }
+            
+            // Instant like update
+            wallpaper.likes++;
+            totalLikes++;
+            userLikes[likeKey] = true;
+            localStorage.setItem('wallpaperverse_user_likes', JSON.stringify(userLikes));
+            
+            // Update the like button immediately
+            const likeButton = document.querySelector(`button[onclick="likeWallpaper('${wallpaperId}')"]`);
+            if (likeButton) {
+                likeButton.classList.add('bg-pink-800', 'opacity-70');
+                likeButton.disabled = true;
+                likeButton.title = 'Already liked';
+                likeButton.innerHTML = '<i class="fas fa-heart mr-2"></i>Liked';
+            }
+            
+            // Update stats immediately
+            updateStats();
+            
+            // Show notification
+            showNotification(`❤️ Liked! (${wallpaper.likes.toLocaleString()} likes)`, 'success');
+            
+            // Update any visible like counts
+            const likeCountElements = document.querySelectorAll(`[data-wallpaper-likes="${wallpaperId}"]`);
+            likeCountElements.forEach(element => {
+                element.textContent = wallpaper.likes.toLocaleString();
+            });
+        }
+
+        function shareWallpaper(wallpaperId) {
+            const wallpaper = wallpapers.find(w => w.id == wallpaperId);
+            if (!wallpaper) return;
+            
+            // Copy the image URL directly
+            const imageUrl = wallpaper.url;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(imageUrl).then(() => {
+                    showShareMessage(wallpaper.title);
+                });
+            } else {
+                // Fallback
+                const textArea = document.createElement('textarea');
+                textArea.value = imageUrl;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showShareMessage(wallpaper.title);
+            }
+        }
+
+        function showShareMessage(wallpaperTitle) {
+            const shareText = translations[currentLanguage]?.shareMessage || 'اگه از عکس خوشت اومد میتونی با دوستات به اشتراک بزاری';
+            const linkCopiedText = translations[currentLanguage]?.linkCopied || 'لینک کپی شد!';
+            
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 modal flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="glass-card p-8 max-w-md w-full mx-4 text-center ${currentLanguage === 'fa' ? 'persian-font' : ''}">
+                    <div class="w-20 h-20 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-share-alt text-white text-3xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold neon-text mb-4">🎉 ${linkCopiedText}</h2>
+                    <p class="text-lg text-gray-300 mb-6">
+                        📋 ${shareText} 🌍✨
+                    </p>
+                    <div class="glass-card p-4 mb-6 border border-cyan-400/20">
+                        <p class="text-sm text-gray-400 mb-2">${currentLanguage === 'fa' ? 'والپیپر انتخاب شده:' : 'Selected wallpaper:'}</p>
+                        <p class="text-cyan-400 font-bold">${wallpaperTitle}</p>
+                    </div>
+                    <button onclick="document.body.removeChild(this.closest('.modal'))" class="cyber-button px-8 py-3 rounded-lg">
+                        <i class="fas fa-check mr-2"></i>${currentLanguage === 'fa' ? 'عالی!' : 'Awesome!'}
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            setTimeout(() => {
+                if (document.body.contains(modal)) {
+                    document.body.removeChild(modal);
+                }
+            }, 8000);
+        }
+
+        function isWallpaperLiked(wallpaperId) {
+            const userId = currentUser ? currentUser.id : 'guest';
+            const likeKey = `${userId}_${wallpaperId}`;
+            return userLikes[likeKey] || false;
+        }
+
+        function downloadWallpaper(wallpaperId) {
+            const wallpaper = wallpapers.find(w => w.id == wallpaperId);
+            if (!wallpaper) return;
+            
+            wallpaper.downloads++;
+            dailyDownloads++;
+            updateStats();
+            
+            const link = document.createElement('a');
+            link.href = wallpaper.url;
+            link.download = `${wallpaper.title.replace(/[^a-z0-9]/gi, '_')}.jpg`;
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showNotification(`🚀 Download started: ${wallpaper.title}`, 'success');
+        }
+
+        function openWallpaperDetail(wallpaperId) {
+            // Check if user is logged in
+            if (!currentUser) {
+                showNotification('🔐 برای مشاهده والپیپر ابتدا وارد شوید!', 'warning');
+                openLoginModal();
+                return;
+            }
+            
+            const wallpaper = wallpapers.find(w => w.id == wallpaperId);
+            if (!wallpaper) return;
+            
+            // Show modal immediately with loading state
+            document.getElementById('wallpaperModal').classList.remove('hidden');
+            document.getElementById('wallpaperModal').classList.add('flex');
+            
+            const content = document.getElementById('wallpaperContent');
+            content.innerHTML = `
+                <div class="text-center py-20">
+                    <div class="loading-spinner mx-auto mb-4"></div>
+                    <p class="text-gray-400">Loading wallpaper details...</p>
+                </div>
+            `;
+            
+            // Load content super fast
+            setTimeout(() => {
+                content.setAttribute('data-wallpaper-id', wallpaper.id);
+                content.innerHTML = `
+                <div class="relative">
+                    <!-- Hero Image Section -->
+                    <div class="relative overflow-hidden rounded-2xl mb-8">
+                        <img src="${wallpaper.url}" alt="${wallpaper.title}" class="w-full h-96 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                        
+                        <!-- Floating Action Buttons -->
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <div class="flex justify-center space-x-4 mb-4">
+                                <button onclick="downloadWallpaper('${wallpaper.id}')" 
+                                        class="cyber-button px-8 py-4 rounded-2xl text-lg font-bold cyber-font transform hover:scale-110 transition-all duration-300">
+                                    <i class="fas fa-download mr-3 text-xl"></i>Download ${wallpaper.quality}
+                                </button>
+                            </div>
+                            
+                            <div class="flex justify-center space-x-3">
+                                <button onclick="refreshWallpaperPage()" 
+                                        class="cyber-button px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 transform hover:scale-105 transition-all duration-300">
+                                    <i class="fas fa-sync-alt mr-2"></i>Refresh
+                                </button>
+                                <button onclick="previewWallpaper('${wallpaper.id}')" 
+                                        class="cyber-button px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 transform hover:scale-105 transition-all duration-300">
+                                    <i class="fas fa-eye mr-2"></i>Preview?
+                                </button>
+                                <button onclick="likeWallpaper('${wallpaper.id}')" 
+                                        class="cyber-button px-6 py-3 rounded-xl ${isWallpaperLiked(wallpaper.id) ? 'bg-pink-800 opacity-70' : 'bg-pink-600 hover:bg-pink-700'} transform hover:scale-105 transition-all duration-300"
+                                        ${isWallpaperLiked(wallpaper.id) ? 'disabled title="Already liked"' : ''}>
+                                    <i class="fas fa-heart mr-2"></i>Like
+                                </button>
+                                <button onclick="shareWallpaper('${wallpaper.id}')" 
+                                        class="cyber-button px-6 py-3 rounded-xl bg-green-600 hover:bg-green-700 transform hover:scale-105 transition-all duration-300">
+                                    <i class="fas fa-share mr-2"></i>Share
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Top Badges -->
+                        <div class="absolute top-6 right-6 space-y-2">
+                            <span class="bg-gradient-to-r from-cyan-400 to-pink-500 text-white text-sm px-4 py-2 rounded-full font-bold cyber-font">
+                                ${wallpaper.quality}
+                            </span>
+                            ${wallpaper.isAI ? '<span class="bg-purple-600 text-white text-sm px-4 py-2 rounded-full cyber-font">🤖 AI</span>' : ''}
+                            ${wallpaper.isPremium ? '<span class="bg-yellow-500 text-black text-sm px-4 py-2 rounded-full cyber-font">⭐ Premium</span>' : ''}
+                            ${wallpaper.isAnimated ? '<span class="bg-green-500 text-white text-sm px-4 py-2 rounded-full cyber-font">🎬 Animated</span>' : ''}
+                        </div>
+                    </div>
+                    
+                    <!-- Title and Info -->
+                    <div class="text-center mb-8">
+                        <h2 class="text-5xl font-black neon-text mb-4 cyber-font">${wallpaper.title}</h2>
+                        <p class="text-xl text-gray-300 mb-6">Experience the ultimate visual quality</p>
+                        
+                        <!-- Stats Grid -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                            <div class="stats-card p-6 transform hover:scale-105 transition-all duration-300">
+                                <div class="text-3xl font-bold text-cyan-400 cyber-font">${wallpaper.width || '3840'}×${wallpaper.height || '2160'}</div>
+                                <p class="text-gray-400 mt-2">Resolution</p>
+                            </div>
+                            <div class="stats-card p-6 transform hover:scale-105 transition-all duration-300">
+                                <div class="text-3xl font-bold text-pink-400 cyber-font">${wallpaper.quality}</div>
+                                <p class="text-gray-400 mt-2">Quality</p>
+                            </div>
+                            <div class="stats-card p-6 transform hover:scale-105 transition-all duration-300">
+                                <div class="text-3xl font-bold text-green-400 cyber-font">${wallpaper.downloads.toLocaleString()}</div>
+                                <p class="text-gray-400 mt-2">Downloads</p>
+                            </div>
+                            <div class="stats-card p-6 transform hover:scale-105 transition-all duration-300">
+                                <div class="text-3xl font-bold text-yellow-400 cyber-font">${wallpaper.likes.toLocaleString()}</div>
+                                <p class="text-gray-400 mt-2">Likes</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Tags -->
+                        <div class="flex flex-wrap justify-center gap-3 mb-8">
+                            ${wallpaper.tags.map(tag => `
+                                <span class="filter-btn px-4 py-2 text-sm cyber-font transform hover:scale-105 transition-all duration-300">
+                                    #${tag}
+                                </span>
+                            `).join('')}
+                        </div>
+                        
+                        <!-- Additional Info -->
+                        <div class="glass-card p-6 text-left">
+                            <h3 class="text-2xl font-bold text-cyan-400 mb-4 cyber-font">Wallpaper Details</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300">
+                                <div class="flex justify-between">
+                                    <span>Category:</span>
+                                    <span class="text-cyan-400 font-bold">${wallpaper.category.charAt(0).toUpperCase() + wallpaper.category.slice(1)}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Views:</span>
+                                    <span class="text-cyan-400 font-bold">${wallpaper.views.toLocaleString()}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Upload Date:</span>
+                                    <span class="text-cyan-400 font-bold">${wallpaper.uploadDate}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>File Size:</span>
+                                    <span class="text-cyan-400 font-bold">${Math.floor(Math.random() * 10) + 2} MB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+                
+                wallpaper.views++;
+                updateStats();
+            }, 50); // Ultra fast loading
+        }
+
+        function handleImageError(imgElement, wallpaperId) {
+            const wallpaper = wallpapers.find(w => w.id == wallpaperId);
+            if (!wallpaper) return;
+            
+            // Generate new fallback URL
+            const timestamp = Date.now();
+            const randomId = Math.floor(Math.random() * 999999);
+            const fallbackUrl = `https://picsum.photos/seed/error${randomId}/${wallpaper.width || 1920}/${wallpaper.height || 1080}`;
+            
+            // Try loading fallback image
+            const fallbackImg = new Image();
+            fallbackImg.onload = function() {
+                imgElement.src = fallbackUrl;
+                wallpaper.url = fallbackUrl;
+                imgElement.style.opacity = '1';
+            };
+            fallbackImg.onerror = function() {
+                // If fallback also fails, show placeholder
+                imgElement.src = `https://via.placeholder.com/${wallpaper.width || 1920}x${wallpaper.height || 1080}/1a1a2e/00f5ff?text=${wallpaper.title.replace(' ', '+')}`;
+                imgElement.style.opacity = '1';
+            };
+            fallbackImg.src = fallbackUrl;
+        }
+
+        function handleGridImageError(imgElement, wallpaperId) {
+            const wallpaper = wallpapers.find(w => w.id == wallpaperId);
+            if (!wallpaper) {
+                // Generate a random fallback if wallpaper not found
+                const timestamp = Date.now();
+                imgElement.src = `https://picsum.photos/800/600?random=${timestamp}`;
+                imgElement.style.opacity = '1';
+                return;
+            }
+            
+            // Generate multiple fallback URLs
+            const timestamp = Date.now();
+            const randomId = Math.floor(Math.random() * 999999);
+            const fallbackUrls = [
+                `https://picsum.photos/seed/grid${wallpaper.category}${timestamp}/800/600`,
+                `https://picsum.photos/seed/fallback${randomId}/800/600`,
+                `https://picsum.photos/800/600?random=${timestamp}`,
+                `https://via.placeholder.com/800x600/16213e/00f5ff?text=${wallpaper.category.toUpperCase()}+${wallpaper.quality}`
+            ];
+            
+            // Try fallback URLs one by one
+            tryGridFallbacks(imgElement, wallpaper, fallbackUrls, 0);
+        }
+
+        function tryGridFallbacks(imgElement, wallpaper, fallbackUrls, index) {
+            if (index >= fallbackUrls.length) {
+                // All fallbacks failed, use final placeholder
+                imgElement.src = `https://via.placeholder.com/800x600/1a1a2e/00f5ff?text=IMAGE+ERROR`;
+                imgElement.style.opacity = '1';
+                // Hide loading spinner
+                const loadingDiv = imgElement.previousElementSibling;
+                if (loadingDiv) loadingDiv.style.display = 'none';
+                return;
+            }
+            
+            const testImg = new Image();
+            testImg.onload = function() {
+                imgElement.src = fallbackUrls[index];
+                wallpaper.url = fallbackUrls[index]; // Update wallpaper URL
+                imgElement.style.opacity = '1';
+                // Hide loading spinner
+                const loadingDiv = imgElement.previousElementSibling;
+                if (loadingDiv) loadingDiv.style.display = 'none';
+            };
+            testImg.onerror = function() {
+                // Try next fallback
+                tryGridFallbacks(imgElement, wallpaper, fallbackUrls, index + 1);
+            };
+            testImg.src = fallbackUrls[index];
+        }
+
+        function closeWallpaperModal() {
+            document.getElementById('wallpaperModal').classList.add('hidden');
+            document.getElementById('wallpaperModal').classList.remove('flex');
+        }
+
+        function refreshWallpaperPage() {
+            const content = document.getElementById('wallpaperContent');
+            const currentWallpaperId = content.getAttribute('data-wallpaper-id');
+            
+            if (!currentWallpaperId) {
+                showNotification('❌ خطا در شناسایی والپیپر!', 'error');
+                return;
+            }
+            
+            const wallpaper = wallpapers.find(w => w.id == currentWallpaperId);
+            if (!wallpaper) {
+                showNotification('❌ والپیپر یافت نشد!', 'error');
+                return;
+            }
+            
+            content.innerHTML = `
+                <div class="text-center py-20">
+                    <div class="loading-spinner mx-auto mb-4"></div>
+                    <p class="text-gray-400">در حال بارگذاری مجدد تصویر...</p>
+                </div>
+            `;
+            
+            // Generate new image URL to force refresh
+            const timestamp = Date.now();
+            const randomId = Math.floor(Math.random() * 999999);
+            const newImageUrl = `${wallpaper.url}?refresh=${timestamp}&id=${randomId}`;
+            
+            // Update wallpaper URL
+            wallpaper.url = newImageUrl;
+            
+            setTimeout(() => {
+                // Reload the wallpaper detail with new image
+                openWallpaperDetail(wallpaper.id);
+                showNotification('✅ تصویر با موفقیت بارگذاری مجدد شد!', 'success');
+            }, 1500);
+        }
+
+        function loadMoreWallpapers() {
+            showNotification('🔄 Loading more ultra-premium wallpapers from world sources...', 'info');
+            
+            setTimeout(() => {
+                for (let i = 0; i < 20; i++) {
+                    const wallpaper = generateUniqueWallpaper();
+                    wallpapers.push(wallpaper);
+                    addWallpaperToGrid(wallpaper);
+                }
+                
+                updateStats();
+                displayAds(); // Refresh ads when loading more wallpapers
+                showNotification('✅ 20 new premium wallpapers from global sources added!', 'success');
+            }, 1500);
+        }
+
+        function generateRandomWallpapers() {
+            showNotification('🎲 Generating random wallpapers...', 'info');
+            
+            setTimeout(() => {
+                document.getElementById('wallpapersGrid').innerHTML = '';
+                wallpapers = [];
+                
+                for (let i = 0; i < 20; i++) {
+                    const wallpaper = generateUniqueWallpaper();
+                    wallpapers.push(wallpaper);
+                    addWallpaperToGrid(wallpaper);
+                }
+                
+                updateStats();
+                showNotification('✅ 20 random wallpapers generated!', 'success');
+            }, 2000);
+        }
+
+        // Filter System
+        function filterCategory(category) {
+            currentFilters.category = category;
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            applyFilters();
+        }
+
+        function updateFilters() {
+            currentFilters.quality = document.getElementById('qualityFilter').value;
+            currentFilters.aspect = document.getElementById('aspectFilter').value;
+            currentFilters.color = document.getElementById('colorFilter').value;
+            currentFilters.style = document.getElementById('styleFilter').value;
+            currentFilters.mood = document.getElementById('moodFilter').value;
+            currentFilters.sort = document.getElementById('sortFilter').value;
+            currentFilters.date = document.getElementById('dateFilter').value;
+            currentFilters.size = document.getElementById('sizeFilter').value;
+            currentFilters.aiOnly = document.getElementById('aiOnlyFilter').checked;
+            currentFilters.premiumOnly = document.getElementById('premiumOnlyFilter').checked;
+            currentFilters.animated = document.getElementById('animatedFilter').checked;
+            currentFilters.exclusive = document.getElementById('exclusiveFilter').checked;
+            currentFilters.newToday = document.getElementById('newTodayFilter').checked;
+            currentFilters.trending = document.getElementById('trendingFilter').checked;
+            currentFilters.topRated = document.getElementById('topRatedFilter').checked;
+            currentFilters.mostDownloaded = document.getElementById('mostDownloadedFilter').checked;
+            currentFilters.editorChoice = document.getElementById('editorChoiceFilter').checked;
+            currentFilters.featured = document.getElementById('featuredFilter').checked;
+        }
+
+        function applyFilters() {
+            updateFilters();
+            
+            let filteredWallpapers = [...wallpapers];
+            
+            // Apply category filter
+            if (currentFilters.category !== 'all') {
+                filteredWallpapers = filteredWallpapers.filter(w => w.category === currentFilters.category);
+            }
+            
+            // Apply quality filter
+            if (currentFilters.quality !== 'all') {
+                filteredWallpapers = filteredWallpapers.filter(w => w.quality.toLowerCase() === currentFilters.quality);
+            }
+            
+            // Apply color filter
+            if (currentFilters.color !== 'all') {
+                filteredWallpapers = filteredWallpapers.filter(w => w.color === currentFilters.color);
+            }
+            
+            // Apply style filter
+            if (currentFilters.style !== 'all') {
+                filteredWallpapers = filteredWallpapers.filter(w => w.style === currentFilters.style);
+            }
+            
+            // Apply mood filter
+            if (currentFilters.mood !== 'all') {
+                filteredWallpapers = filteredWallpapers.filter(w => w.mood === currentFilters.mood);
+            }
+            
+            // Apply size filter
+            if (currentFilters.size !== 'all') {
+                filteredWallpapers = filteredWallpapers.filter(w => {
+                    const size = w.fileSize;
+                    switch(currentFilters.size) {
+                        case 'small': return size < 1;
+                        case 'medium': return size >= 1 && size <= 5;
+                        case 'large': return size > 5 && size <= 15;
+                        case 'xlarge': return size > 15;
+                        default: return true;
+                    }
+                });
+            }
+            
+            // Apply date filter
+            if (currentFilters.date !== 'all') {
+                const now = new Date();
+                filteredWallpapers = filteredWallpapers.filter(w => {
+                    const wallpaperDate = new Date(w.createdAt);
+                    const diffTime = now - wallpaperDate;
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    
+                    switch(currentFilters.date) {
+                        case 'today': return diffDays <= 1;
+                        case 'week': return diffDays <= 7;
+                        case 'month': return diffDays <= 30;
+                        case 'year': return diffDays <= 365;
+                        default: return true;
+                    }
+                });
+            }
+            
+            // Apply content type filters
+            if (currentFilters.aiOnly) {
+                filteredWallpapers = filteredWallpapers.filter(w => w.isAI);
+            }
+            
+            if (currentFilters.premiumOnly) {
+                filteredWallpapers = filteredWallpapers.filter(w => w.isPremium);
+            }
+            
+            if (currentFilters.animated) {
+                filteredWallpapers = filteredWallpapers.filter(w => w.isAnimated);
+            }
+            
+            if (currentFilters.exclusive) {
+                filteredWallpapers = filteredWallpapers.filter(w => w.isExclusive);
+            }
+            
+            if (currentFilters.newToday) {
+                const today = new Date().toDateString();
+                filteredWallpapers = filteredWallpapers.filter(w => {
+                    const wallpaperDate = new Date(w.createdAt).toDateString();
+                    return today === wallpaperDate;
+                });
+            }
+            
+            // Apply popularity filters
+            if (currentFilters.trending) {
+                filteredWallpapers = filteredWallpapers.filter(w => w.isTrending);
+            }
+            
+            if (currentFilters.topRated) {
+                filteredWallpapers = filteredWallpapers.filter(w => parseFloat(w.rating) >= 4.5);
+            }
+            
+            if (currentFilters.mostDownloaded) {
+                filteredWallpapers = filteredWallpapers.filter(w => w.downloads >= 50000);
+            }
+            
+            if (currentFilters.editorChoice) {
+                filteredWallpapers = filteredWallpapers.filter(w => w.isEditorChoice);
+            }
+            
+            if (currentFilters.featured) {
+                filteredWallpapers = filteredWallpapers.filter(w => w.isFeatured);
+            }
+            
+            // Apply sorting
+            switch(currentFilters.sort) {
+                case 'popular':
+                    filteredWallpapers.sort((a, b) => b.likes - a.likes);
+                    break;
+                case 'downloads':
+                    filteredWallpapers.sort((a, b) => b.downloads - a.downloads);
+                    break;
+                case 'likes':
+                    filteredWallpapers.sort((a, b) => b.likes - a.likes);
+                    break;
+                case 'trending':
+                    filteredWallpapers.sort((a, b) => b.views - a.views);
+                    break;
+                case 'random':
+                    filteredWallpapers.sort(() => Math.random() - 0.5);
+                    break;
+                case 'newest':
+                default:
+                    filteredWallpapers.sort((a, b) => b.createdAt - a.createdAt);
+                    break;
+            }
+            
+            // Update grid
+            const grid = document.getElementById('wallpapersGrid');
+            grid.innerHTML = '';
+            
+            filteredWallpapers.forEach(wallpaper => {
+                addWallpaperToGrid(wallpaper);
+            });
+            
+            // Update filter result count
+            document.getElementById('filterResultCount').textContent = `${filteredWallpapers.length} wallpapers match your filters`;
+            
+            showNotification(`🎯 ${filteredWallpapers.length} wallpapers found with current filters`, 'info');
+        }
+
+        function clearAllFilters() {
+            currentFilters = {
+                category: 'all',
+                quality: 'all',
+                aspect: 'all',
+                color: 'all',
+                style: 'all',
+                mood: 'all',
+                sort: 'newest',
+                date: 'all',
+                size: 'all',
+                aiOnly: false,
+                premiumOnly: false,
+                animated: false,
+                exclusive: false,
+                newToday: false,
+                trending: false,
+                topRated: false,
+                mostDownloaded: false,
+                editorChoice: false,
+                featured: false
+            };
+            
+            document.getElementById('qualityFilter').value = 'all';
+            document.getElementById('aspectFilter').value = 'all';
+            document.getElementById('colorFilter').value = 'all';
+            document.getElementById('styleFilter').value = 'all';
+            document.getElementById('moodFilter').value = 'all';
+            document.getElementById('sortFilter').value = 'newest';
+            document.getElementById('dateFilter').value = 'all';
+            document.getElementById('sizeFilter').value = 'all';
+            document.getElementById('aiOnlyFilter').checked = false;
+            document.getElementById('premiumOnlyFilter').checked = false;
+            document.getElementById('animatedFilter').checked = false;
+            document.getElementById('exclusiveFilter').checked = false;
+            document.getElementById('newTodayFilter').checked = false;
+            document.getElementById('trendingFilter').checked = false;
+            document.getElementById('topRatedFilter').checked = false;
+            document.getElementById('mostDownloadedFilter').checked = false;
+            document.getElementById('editorChoiceFilter').checked = false;
+            document.getElementById('featuredFilter').checked = false;
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector('.filter-btn').classList.add('active');
+            
+            applyFilters();
+            showNotification('🔄 All filters cleared', 'info');
+        }
+
+        function toggleViewMode() {
+            viewMode = viewMode === 'masonry' ? 'grid' : 'masonry';
+            const grid = document.getElementById('wallpapersGrid');
+            const toggle = document.getElementById('viewToggle');
+            
+            if (viewMode === 'grid') {
+                grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6';
+                toggle.innerHTML = '<i class="fas fa-th-large mr-2"></i>Masonry View';
+            } else {
+                grid.className = 'masonry-grid';
+                toggle.innerHTML = '<i class="fas fa-th mr-2"></i>Grid View';
+            }
+            
+            showNotification(`📱 Switched to ${viewMode} view`, 'info');
+        }
+
+        async function handleSearch(event) {
+            const query = event.target.value.toLowerCase().trim();
+            
+            if (query.length === 0) {
+                applyFilters();
+                return;
+            }
+            
+            if (query.length < 2) return;
+            
+            showLoading(true);
+            showNotification(`🔍 Searching for "${query}" in global database...`, 'info');
+            
+            // Search in existing wallpapers
+            const localResults = wallpapers.filter(wallpaper => {
+                const searchableText = [
+                    wallpaper.title,
+                    wallpaper.category,
+                    wallpaper.quality,
+                    ...wallpaper.tags
+                ].join(' ').toLowerCase();
+                
+                return searchableText.includes(query);
+            });
+            
+            // Generate new wallpapers based on search query using Premium Global Sources
+            const searchCategories = ['nature', 'space', 'abstract', 'gaming', 'ai', 'cyberpunk', 'fantasy', 'minimalist'];
+            const matchingCategory = searchCategories.find(cat => query.includes(cat)) || 'abstract';
+            
+            // Generate 15 new ultra high-quality wallpapers based on search from world's best sources
+            const newWallpapers = [];
+            for (let i = 0; i < 15; i++) {
+                const timestamp = Date.now() + i;
+                const randomId = Math.floor(Math.random() * 999999);
+                const qualities = ['8K', '4K', '2K', 'FHD'];
+                const quality = qualities[Math.floor(Math.random() * qualities.length)];
+                
+                const dimensions = {
+                    '8K': { width: 7680, height: 4320 },
+                    '4K': { width: 3840, height: 2160 },
+                    '2K': { width: 2560, height: 1440 },
+                    'FHD': { width: 1920, height: 1080 }
+                };
+                
+                const dim = dimensions[quality];
+                
+                // ULTRA PREMIUM Search Image Sources - Maximum Quality
+                const searchImageProviders = [
+                    // ULTRA HIGH QUALITY UNSPLASH SEARCH RESULTS
+                    `https://source.unsplash.com/${dim.width}x${dim.height}/?${query},wallpaper,${quality},premium,professional,ultra,hd&sig=${randomId}&fm=jpg&q=100&fit=crop&crop=entropy`,
+                    `https://source.unsplash.com/${dim.width}x${dim.height}/?${query},${matchingCategory},stunning,premium,wallpaper&sig=${timestamp}&fm=jpg&q=100&fit=crop`,
+                    `https://source.unsplash.com/${dim.width}x${dim.height}/?search,${query},${quality},desktop,background,premium&sig=${randomId + timestamp}&fm=jpg&q=100`,
+                    `https://source.unsplash.com/${dim.width}x${dim.height}/?${query},ultra,hd,professional,stunning,premium&sig=${Math.floor(Math.random() * 999999)}&fm=jpg&q=100&fit=crop`,
+                    
+                    // ULTRA HIGH QUALITY PICSUM with search-based seeds
+                    `https://picsum.photos/seed/${query.replace(' ', '')}premium${randomId}/${dim.width}/${dim.height}.jpg?quality=100`,
+                    `https://picsum.photos/seed/ultra${query}${timestamp}/${dim.width}/${dim.height}.jpg?quality=100`,
+                    `https://picsum.photos/seed/${matchingCategory}${query}ultra${randomId}/${dim.width}/${dim.height}.jpg?quality=100`,
+                    `https://picsum.photos/seed/search${query}premium${timestamp}/${dim.width}/${dim.height}.jpg?quality=100`,
+                    `https://picsum.photos/seed/${quality}${query}wallpaper${randomId}/${dim.width}/${dim.height}.jpg?quality=100`,
+                    
+                    // PREMIUM PICSUM with advanced parameters
+                    `https://picsum.photos/${dim.width}/${dim.height}.jpg?random=${randomId}&quality=100&contrast=1.1&saturation=1.05&brightness=1.02`,
+                    `https://picsum.photos/${dim.width}/${dim.height}.jpg?random=${timestamp}&quality=100&contrast=1.15&saturation=1.1&brightness=1.05`,
+                    `https://picsum.photos/${dim.width}/${dim.height}.jpg?random=${Date.now()}&quality=100&contrast=1.2&saturation=1.15&brightness=1.08`,
+                    
+                    // MORE UNSPLASH SEARCH VARIATIONS
+                    `https://source.unsplash.com/${dim.width}x${dim.height}/?${query},4k,8k,wallpaper,desktop,premium&sig=${randomId}&fm=jpg&q=100&fit=crop&crop=entropy`,
+                    `https://source.unsplash.com/${dim.width}x${dim.height}/?${query},nature,landscape,stunning,professional&sig=${timestamp}&fm=jpg&q=100&fit=crop`,
+                    `https://source.unsplash.com/${dim.width}x${dim.height}/?${query},abstract,digital,art,premium,ultra&sig=${randomId + 100}&fm=jpg&q=100&fit=crop`,
+                    `https://source.unsplash.com/${dim.width}x${dim.height}/?${query},space,galaxy,stars,cosmic,premium&sig=${timestamp + 200}&fm=jpg&q=100&fit=crop`,
+                    `https://source.unsplash.com/${dim.width}x${dim.height}/?${query},technology,cyber,neon,futuristic&sig=${randomId + 300}&fm=jpg&q=100&fit=crop`,
+                    
+                    // PREMIUM THEMED SEARCH RESULTS
+                    `https://picsum.photos/seed/result${query}ultra${randomId}/${dim.width}/${dim.height}.jpg?quality=100`,
+                    `https://picsum.photos/seed/${matchingCategory}search${quality}${timestamp}/${dim.width}/${dim.height}.jpg?quality=100`,
+                    `https://picsum.photos/seed/premium${query.replace(' ', '')}wallpaper${randomId}/${dim.width}/${dim.height}.jpg?quality=100`,
+                    `https://picsum.photos/seed/professional${query}${quality}${timestamp}/${dim.width}/${dim.height}.jpg?quality=100`,
+                    `https://picsum.photos/seed/stunning${query}ultra${randomId}/${dim.width}/${dim.height}.jpg?quality=100`
+                ];
+                
+                const newWallpaper = {
+                    id: timestamp + randomId,
+                    title: `${query.charAt(0).toUpperCase() + query.slice(1)} ${quality} Wallpaper`,
+                    category: matchingCategory,
+                    quality: quality,
+                    color: 'colorful',
+                    url: searchImageProviders[Math.floor(Math.random() * searchImageProviders.length)],
+                    width: dim.width,
+                    height: dim.height,
+                    aspectRatio: (dim.width / dim.height).toFixed(2),
+                    downloads: Math.floor(Math.random() * 10000) + 500,
+                    likes: Math.floor(Math.random() * 5000) + 100,
+                    views: Math.floor(Math.random() * 20000) + 1000,
+                    isAI: Math.random() > 0.5,
+                    isPremium: Math.random() > 0.6,
+                    isAnimated: Math.random() > 0.8,
+                    uploadDate: new Date().toLocaleDateString(),
+                    tags: [matchingCategory, quality, query, 'search-result'],
+                    aiScore: Math.floor(Math.random() * 40) + 60,
+                    createdAt: timestamp
+                };
+                
+                newWallpapers.push(newWallpaper);
+                wallpapers.push(newWallpaper);
+            }
+            
+            // Combine results
+            const allResults = [...localResults, ...newWallpapers];
+            
+            // Update grid
+            const grid = document.getElementById('wallpapersGrid');
+            grid.innerHTML = '';
+            
+            setTimeout(() => {
+                allResults.forEach(wallpaper => {
+                    addWallpaperToGrid(wallpaper);
+                });
+                
+                updateStats();
+                showLoading(false);
+                showNotification(`🎯 Found ${allResults.length} ultra-premium wallpapers from world's best sources for "${query}"!`, 'success');
+            }, 2000);
+        }
+
+        function showLoading(show) {
+            const loading = document.getElementById('loading');
+            if (show) {
+                loading.classList.remove('hidden');
+            } else {
+                loading.classList.add('hidden');
+            }
+        }
+
+        function updateStats() {
+            totalWallpapers = wallpapers.length;
+            aiGenerated = wallpapers.filter(w => w.isAI).length;
+            totalLikes = wallpapers.reduce((sum, w) => sum + w.likes, 0);
+            newToday = wallpapers.filter(w => {
+                const today = new Date().toDateString();
+                const wallpaperDate = new Date(w.createdAt).toDateString();
+                return today === wallpaperDate;
+            }).length;
+            
+            document.getElementById('totalWallpapers').textContent = totalWallpapers.toLocaleString();
+            document.getElementById('dailyDownloads').textContent = dailyDownloads.toLocaleString();
+            document.getElementById('totalLikes').textContent = totalLikes.toLocaleString();
+            document.getElementById('aiGenerated').textContent = aiGenerated.toLocaleString();
+            document.getElementById('newToday').textContent = newToday.toLocaleString();
+        }
+
+        // Login System
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('loginModal').classList.add('flex');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('loginModal').classList.remove('flex');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                showNotification('❌ Please fill in all fields!', 'error');
+                return;
+            }
+            
+            let user = users.find(u => u.email === email);
+            
+            // Admin emails list
+            const adminEmails = [
+                'danialnikdsti127@gmail.com',
+                'admin@wallpaperverse.com',
+                'admin@admin.com',
+                'root@wallpaperverse.com',
+                'superadmin@wallpaperverse.com'
+            ];
+            
+            if (!user) {
+                // Create new user
+                user = {
+                    id: Date.now(),
+                    email: email,
+                    password: password,
+                    name: email.split('@')[0],
+                    role: adminEmails.includes(email) ? 'admin' : 'user',
+                    avatar: `https://ui-avatars.com/api/?name=${email.split('@')[0]}&background=00f5ff&color=fff`,
+                    joinDate: new Date().toLocaleDateString(),
+                    lastLogin: new Date().toLocaleDateString(),
+                    totalDownloads: 0,
+                    totalLikes: 0,
+                    favoriteCategory: 'gaming',
+                    isPremium: false,
+                    status: 'active'
+                };
+                users.push(user);
+                saveUsers();
+                showNotification(`🎉 Welcome ${user.name}! Account created successfully!`, 'success');
+            } else if (user.password !== password) {
+                showNotification('❌ Incorrect password!', 'error');
+                return;
+            } else {
+                user.lastLogin = new Date().toLocaleDateString();
+                saveUsers();
+            }
+            
+            currentUser = user;
+            isAdmin = user.role === 'admin';
+            
+            localStorage.setItem('wallpaperverse_current_user', JSON.stringify(currentUser));
+            
+            updateLoginUI();
+            closeLoginModal();
+            showNotification(`🎉 Welcome back ${currentUser.name}!`, 'success');
+        }
+
+        function logout() {
+            currentUser = null;
+            isAdmin = false;
+            localStorage.removeItem('wallpaperverse_current_user');
+            updateLoginUI();
+            closeAdminPanel();
+            showNotification('👋 Successfully logged out!', 'info');
+        }
+
+        function updateLoginUI() {
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const adminBtn = document.getElementById('adminBtn');
+            const homeBtn = document.getElementById('homeBtn');
+            const dashboardBtn = document.getElementById('dashboardBtn');
+            
+            if (currentUser) {
+                loginBtn.classList.add('hidden');
+                logoutBtn.classList.remove('hidden');
+                
+                if (isAdmin) {
+                    adminBtn.classList.remove('hidden');
+                    // Show Dashboard button instead of Home for admins
+                    if (homeBtn) homeBtn.classList.add('hidden');
+                    if (dashboardBtn) dashboardBtn.classList.remove('hidden');
+                } else {
+                    adminBtn.classList.add('hidden');
+                    if (homeBtn) homeBtn.classList.remove('hidden');
+                    if (dashboardBtn) dashboardBtn.classList.add('hidden');
+                }
+            } else {
+                loginBtn.classList.remove('hidden');
+                logoutBtn.classList.add('hidden');
+                adminBtn.classList.add('hidden');
+                if (homeBtn) homeBtn.classList.remove('hidden');
+                if (dashboardBtn) dashboardBtn.classList.add('hidden');
+            }
+        }
+
+        function checkLoginStatus() {
+            const savedUser = localStorage.getItem('wallpaperverse_current_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                isAdmin = currentUser.role === 'admin';
+                updateLoginUI();
+            }
+        }
+
+        function loadUsers() {
+            const savedUsers = localStorage.getItem('wallpaperverse_users');
+            if (savedUsers) {
+                users = JSON.parse(savedUsers);
+            } else {
+                users = [
+                    {
+                        id: 1,
+                        email: 'danialnikdsti127@gmail.com',
+                        password: 'admin123',
+                        name: 'Danial',
+                        role: 'admin',
+                        avatar: 'https://ui-avatars.com/api/?name=Danial&background=00f5ff&color=fff',
+                        joinDate: new Date().toLocaleDateString(),
+                        lastLogin: new Date().toLocaleDateString(),
+                        totalDownloads: 0,
+                        totalLikes: 0,
+                        favoriteCategory: 'all',
+                        isPremium: true,
+                        status: 'active'
+                    },
+                    {
+                        id: 2,
+                        email: 'admin@wallpaperverse.com',
+                        password: 'admin123',
+                        name: 'Admin',
+                        role: 'admin',
+                        avatar: 'https://ui-avatars.com/api/?name=Admin&background=ff0080&color=fff',
+                        joinDate: new Date().toLocaleDateString(),
+                        lastLogin: new Date().toLocaleDateString(),
+                        totalDownloads: 0,
+                        totalLikes: 0,
+                        favoriteCategory: 'all',
+                        isPremium: true,
+                        status: 'active'
+                    },
+                    {
+                        id: 3,
+                        email: 'admin@admin.com',
+                        password: 'admin123',
+                        name: 'SuperAdmin',
+                        role: 'admin',
+                        avatar: 'https://ui-avatars.com/api/?name=SuperAdmin&background=7c3aed&color=fff',
+                        joinDate: new Date().toLocaleDateString(),
+                        lastLogin: new Date().toLocaleDateString(),
+                        totalDownloads: 0,
+                        totalLikes: 0,
+                        favoriteCategory: 'all',
+                        isPremium: true,
+                        status: 'active'
+                    }
+                ];
+                saveUsers();
+            }
+        }
+
+        function saveUsers() {
+            localStorage.setItem('wallpaperverse_users', JSON.stringify(users));
+        }
+
+        // Admin Panel
+        function openAdminPanel() {
+            if (!isAdmin) {
+                showNotification('❌ You do not have admin access!', 'error');
+                return;
+            }
+            
+            document.getElementById('adminPanel').classList.remove('hidden');
+            updateAdminStats();
+            showAdminTab('wallpapers');
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminPanel').classList.add('hidden');
+        }
+
+        function updateAdminStats() {
+            document.getElementById('adminTotalUsers').textContent = users.length;
+            document.getElementById('adminTotalWallpapers').textContent = wallpapers.length;
+            document.getElementById('adminTotalDownloads').textContent = wallpapers.reduce((sum, w) => sum + w.downloads, 0).toLocaleString();
+            document.getElementById('adminTotalAds').textContent = advertisements.length;
+            document.getElementById('adminRevenue').textContent = `$${Math.floor(dailyDownloads * 0.01).toLocaleString()}`;
+        }
+
+        function showAdminTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            
+            const content = document.getElementById('adminContent');
+            
+            switch(tabName) {
+                case 'wallpapers':
+                    content.innerHTML = `
+                        <div class="flex justify-between items-center mb-6 persian-font">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-2">مدیریت والپیپرها</h3>
+                                <p class="text-gray-400">مجموع: ${wallpapers.length} والپیپر</p>
+                            </div>
+                            <div class="flex space-x-4">
+                                <button onclick="refreshWallpapers()" class="cyber-button px-4 py-2 rounded-lg bg-green-600">
+                                    <i class="fas fa-sync-alt mr-2"></i>بروزرسانی
+                                </button>
+                                <button onclick="showAddWallpaperForm()" class="cyber-button px-6 py-2 rounded-lg">
+                                    <i class="fas fa-plus mr-2"></i>افزودن والپیپر
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Add Wallpaper Form -->
+                        <div id="addWallpaperForm" class="hidden glass-card p-6 mb-8 persian-font">
+                            <h4 class="text-xl font-bold text-cyan-400 mb-4">افزودن والپیپر جدید</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input type="text" id="wallpaperTitle" placeholder="عنوان والپیپر" class="search-input px-4 py-3 rounded-lg">
+                                <input type="url" id="wallpaperUrl" placeholder="آدرس تصویر" class="search-input px-4 py-3 rounded-lg">
+                                <select id="wallpaperCategory" class="search-input px-4 py-3 rounded-lg">
+                                    <option value="gaming">بازی</option>
+                                    <option value="nature">طبیعت</option>
+                                    <option value="space">فضا</option>
+                                    <option value="ai">هنر هوش مصنوعی</option>
+                                    <option value="abstract">انتزاعی</option>
+                                    <option value="anime">انیمه</option>
+                                    <option value="cars">ماشین</option>
+                                    <option value="cyberpunk">سایبرپانک</option>
+                                </select>
+                                <select id="wallpaperQuality" class="search-input px-4 py-3 rounded-lg">
+                                    <option value="8K">8K فوق العاده</option>
+                                    <option value="4K">4K پریمیوم</option>
+                                    <option value="2K">2K HD</option>
+                                    <option value="FHD">Full HD</option>
+                                </select>
+                            </div>
+                            <div class="flex space-x-4 mt-6">
+                                <button onclick="saveWallpaper()" class="cyber-button px-6 py-3 rounded-lg">
+                                    <i class="fas fa-save mr-2"></i>ذخیره
+                                </button>
+                                <button onclick="hideAddWallpaperForm()" class="cyber-button px-6 py-3 rounded-lg bg-gray-600">
+                                    <i class="fas fa-times mr-2"></i>لغو
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Wallpapers Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 persian-font">
+                            ${wallpapers.map(w => `
+                                <div class="glass-card p-4">
+                                    <img src="${w.url}" alt="${w.title}" class="w-full h-32 object-cover rounded-lg mb-3">
+                                    <h4 class="font-bold text-white mb-2">${w.title}</h4>
+                                    <div class="text-xs text-gray-400 mb-3">
+                                        <span class="bg-cyan-400/20 px-2 py-1 rounded mr-1">${w.category}</span>
+                                        <span class="bg-pink-400/20 px-2 py-1 rounded">${w.quality}</span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm mb-3">
+                                        📥 ${w.downloads.toLocaleString()} دانلود | ❤️ ${w.likes.toLocaleString()} لایک
+                                    </p>
+                                    <div class="flex space-x-2">
+                                        <button onclick="editWallpaper('${w.id}')" class="cyber-button px-3 py-1 text-sm rounded">
+                                            <i class="fas fa-edit mr-1"></i>ویرایش
+                                        </button>
+                                        <button onclick="deleteWallpaper('${w.id}')" class="cyber-button px-3 py-1 text-sm rounded bg-red-600">
+                                            <i class="fas fa-trash mr-1"></i>حذف
+                                        </button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    break;
+                    
+                case 'ads':
+                    content.innerHTML = `
+                        <div class="flex justify-between items-center mb-6 persian-font">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-2">مدیریت تبلیغات</h3>
+                                <p class="text-gray-400">مجموع: ${advertisements.length} تبلیغ | فعال: ${advertisements.filter(ad => ad.status === 'active').length}</p>
+                            </div>
+                            <div class="flex space-x-4">
+                                <button onclick="refreshAds()" class="cyber-button px-4 py-2 rounded-lg bg-green-600">
+                                    <i class="fas fa-sync-alt mr-2"></i>بروزرسانی
+                                </button>
+                                <button onclick="showAddAdForm()" class="cyber-button px-6 py-2 rounded-lg">
+                                    <i class="fas fa-plus mr-2"></i>افزودن تبلیغ
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Add Ad Form -->
+                        <div id="addAdForm" class="hidden glass-card p-6 mb-8 persian-font">
+                            <h4 class="text-xl font-bold text-cyan-400 mb-4">افزودن تبلیغ جدید</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input type="text" id="adTitle" placeholder="عنوان تبلیغ" class="search-input px-4 py-3 rounded-lg">
+                                <input type="url" id="adUrl" placeholder="آدرس تبلیغ" class="search-input px-4 py-3 rounded-lg">
+                                <div>
+                                    <label class="block text-gray-300 mb-2">آپلود تصویر</label>
+                                    <input type="file" id="adImageFile" accept="image/*" class="search-input px-4 py-3 rounded-lg w-full">
+                                    <input type="url" id="adImageUrl" placeholder="یا آدرس تصویر را وارد کنید" class="search-input px-4 py-3 rounded-lg w-full mt-2">
+                                </div>
+                                <select id="adDuration" class="search-input px-4 py-3 rounded-lg">
+                                    <option value="1">۱ دقیقه</option>
+                                    <option value="5">۵ دقیقه</option>
+                                    <option value="30">۳۰ دقیقه</option>
+                                    <option value="60">۱ ساعت</option>
+                                    <option value="360">۶ ساعت</option>
+                                    <option value="720">۱۲ ساعت</option>
+                                    <option value="1440">۱ روز</option>
+                                    <option value="10080">۱ هفته</option>
+                                    <option value="43200">۱ ماه</option>
+                                    <option value="129600">۳ ماه</option>
+                                    <option value="259200">۶ ماه</option>
+                                    <option value="525600">۱ سال</option>
+                                </select>
+                                <div>
+                                    <label class="block text-gray-300 mb-2">زمان شروع نمایش (ثانیه)</label>
+                                    <input type="number" id="adStartDelay" value="5" min="1" max="300" class="search-input px-4 py-3 rounded-lg w-full">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-300 mb-2">فاصله تکرار (دقیقه)</label>
+                                    <input type="number" id="adRepeatInterval" value="3" min="1" max="60" class="search-input px-4 py-3 rounded-lg w-full">
+                                </div>
+                                <select id="adPosition" class="search-input px-4 py-3 rounded-lg" onchange="togglePopupTiming()">
+                                    <option value="header">بالای صفحه</option>
+                                    <option value="sidebar">کنار صفحه</option>
+                                    <option value="footer">پایین صفحه</option>
+                                    <option value="between">بین والپیپرها</option>
+                                    <option value="popup">پاپ آپ</option>
+                                    <option value="banner">بنر</option>
+                                </select>
+                                <div id="popupTimingSection" class="hidden">
+                                    <label class="block text-gray-300 mb-2">زمان نمایش پاپ آپ</label>
+                                    <select id="popupDisplayTime" class="search-input px-4 py-3 rounded-lg w-full">
+                                        <option value="3">۳ ثانیه</option>
+                                        <option value="5">۵ ثانیه</option>
+                                        <option value="10">۱۰ ثانیه</option>
+                                        <option value="15" selected>۱۵ ثانیه</option>
+                                        <option value="30">۳۰ ثانیه</option>
+                                        <option value="60">۱ دقیقه</option>
+                                        <option value="120">۲ دقیقه</option>
+                                        <option value="300">۵ دقیقه</option>
+                                    </select>
+                                </div>
+                                <textarea id="adDescription" placeholder="توضیحات تبلیغ (اختیاری)" class="search-input px-4 py-3 rounded-lg h-20 md:col-span-2"></textarea>
+                            </div>
+                            <div class="flex space-x-4 mt-6">
+                                <button onclick="saveAd()" class="cyber-button px-6 py-3 rounded-lg">
+                                    <i class="fas fa-save mr-2"></i>ذخیره تبلیغ
+                                </button>
+                                <button onclick="previewAd()" class="cyber-button px-6 py-3 rounded-lg bg-blue-600">
+                                    <i class="fas fa-eye mr-2"></i>پیش‌نمایش
+                                </button>
+                                <button onclick="hideAddAdForm()" class="cyber-button px-6 py-3 rounded-lg bg-gray-600">
+                                    <i class="fas fa-times mr-2"></i>لغو
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Ads List -->
+                        <div class="space-y-4 persian-font">
+                            ${advertisements.length === 0 ? `
+                                <div class="text-center py-16">
+                                    <i class="fas fa-ad text-6xl text-gray-400 mb-4"></i>
+                                    <p class="text-gray-400">هنوز تبلیغی وجود ندارد</p>
+                                </div>
+                            ` : advertisements.map(ad => `
+                                <div class="glass-card p-6 flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="${ad.image}" alt="${ad.title}" class="w-16 h-16 object-cover rounded-lg">
+                                        <div>
+                                            <h4 class="font-bold text-white">${ad.title}</h4>
+                                            <p class="text-gray-400 text-sm">${ad.url}</p>
+                                            <div class="flex space-x-2 text-xs mt-1">
+                                                <span class="${ad.status === 'active' ? 'text-green-400' : 'text-red-400'}">
+                                                    ${ad.status === 'active' ? '✅ فعال' : '❌ غیرفعال'}
+                                                </span>
+                                                <span class="text-gray-500">📍 ${getPositionText(ad.position)}</span>
+                                                <span class="text-gray-500">⏰ ${ad.duration} دقیقه</span>
+                                                <span class="text-blue-400">🚀 شروع: ${ad.startDelay || 5}ث</span>
+                                                <span class="text-green-400">🔄 تکرار: ${ad.repeatInterval || 3}د</span>
+                                                <span class="text-gray-500">👆 ${ad.clicks || 0} کلیک</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button onclick="editAd('${ad.id}')" class="cyber-button px-4 py-2 text-sm rounded">
+                                            <i class="fas fa-edit mr-1"></i>ویرایش
+                                        </button>
+                                        <button onclick="toggleAdStatus('${ad.id}')" class="cyber-button px-4 py-2 text-sm rounded ${ad.status === 'active' ? 'bg-red-600' : 'bg-green-600'}">
+                                            ${ad.status === 'active' ? 'غیرفعال' : 'فعال'}
+                                        </button>
+                                        <button onclick="deleteAd('${ad.id}')" class="cyber-button px-4 py-2 text-sm rounded bg-red-600">
+                                            <i class="fas fa-trash mr-1"></i>حذف
+                                        </button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    break;
+                    
+                case 'users':
+                    content.innerHTML = `
+                        <div class="flex justify-between items-center mb-6 persian-font">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-2">مدیریت کاربران</h3>
+                                <p class="text-gray-400">مجموع: ${users.length} کاربر | فعال: ${users.filter(u => u.status === 'active').length}</p>
+                            </div>
+                            <button onclick="refreshUsers()" class="cyber-button px-4 py-2 rounded-lg bg-green-600">
+                                <i class="fas fa-sync-alt mr-2"></i>بروزرسانی
+                            </button>
+                        </div>
+                        
+                        <div class="space-y-4 persian-font">
+                            ${users.map(user => `
+                                <div class="glass-card p-6">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-4">
+                                            <img src="${user.avatar}" alt="${user.name}" class="w-16 h-16 rounded-full border-2 border-cyan-400">
+                                            <div>
+                                                <h4 class="font-bold text-white text-lg">${user.name}</h4>
+                                                <p class="text-gray-400">${user.email}</p>
+                                                <div class="flex space-x-4 text-sm mt-2">
+                                                    <span class="${user.role === 'admin' ? 'text-cyan-400' : 'text-gray-500'}">
+                                                        ${user.role === 'admin' ? '👑 مدیر' : '👤 کاربر'}
+                                                    </span>
+                                                    <span class="text-gray-500">📅 عضویت: ${user.joinDate}</span>
+                                                    <span class="text-green-400">🟢 آخرین ورود: ${user.lastLogin}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="flex space-x-2 mb-2">
+                                                <button onclick="changeUserRole('${user.id}')" class="cyber-button px-3 py-1 text-sm rounded">
+                                                    <i class="fas fa-user-cog mr-1"></i>تغییر نقش
+                                                </button>
+                                                <button onclick="editUser('${user.id}')" class="cyber-button px-3 py-1 text-sm rounded">
+                                                    <i class="fas fa-edit mr-1"></i>ویرایش
+                                                </button>
+                                                ${user.role !== 'admin' ? `
+                                                    <button onclick="deleteUser('${user.id}')" class="cyber-button px-3 py-1 text-sm rounded bg-red-600">
+                                                        <i class="fas fa-trash mr-1"></i>حذف
+                                                    </button>
+                                                ` : ''}
+                                            </div>
+                                            <div class="text-xs text-gray-400">
+                                                <p>دانلودها: ${user.totalDownloads || 0}</p>
+                                                <p>لایک‌ها: ${user.totalLikes || 0}</p>
+                                                <p>وضعیت: <span class="${user.status === 'active' ? 'text-green-400' : 'text-red-400'}">${user.status === 'active' ? 'فعال' : 'غیرفعال'}</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Detailed User Info -->
+                                    <div class="mt-4 pt-4 border-t border-gray-700">
+                                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                                            <div class="stats-card p-3">
+                                                <div class="text-lg font-bold text-cyan-400">${user.totalDownloads || 0}</div>
+                                                <p class="text-gray-400 text-xs">دانلودها</p>
+                                            </div>
+                                            <div class="stats-card p-3">
+                                                <div class="text-lg font-bold text-pink-400">${user.totalLikes || 0}</div>
+                                                <p class="text-gray-400 text-xs">لایک داده</p>
+                                            </div>
+                                            <div class="stats-card p-3">
+                                                <div class="text-lg font-bold text-green-400">${user.favoriteCategory || 'ندارد'}</div>
+                                                <p class="text-gray-400 text-xs">علاقه‌مندی</p>
+                                            </div>
+                                            <div class="stats-card p-3">
+                                                <div class="text-lg font-bold ${user.isPremium ? 'text-yellow-400' : 'text-gray-400'}">${user.isPremium ? 'پریمیوم' : 'رایگان'}</div>
+                                                <p class="text-gray-400 text-xs">پلن</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    break;
+                    
+                case 'analytics':
+                    content.innerHTML = `
+                        <div class="flex justify-between items-center mb-6 persian-font">
+                            <h3 class="text-2xl font-bold text-white">داشبورد آمار و تحلیل</h3>
+                            <button onclick="refreshAnalytics()" class="cyber-button px-4 py-2 rounded-lg bg-green-600">
+                                <i class="fas fa-sync-alt mr-2"></i>بروزرسانی
+                            </button>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 persian-font">
+                            <div class="glass-card p-6">
+                                <h4 class="text-xl font-bold text-green-400 mb-4">ترافیک سایت</h4>
+                                <div class="h-32 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg flex items-center justify-center">
+                                    <span class="text-white font-bold">نمودار ترافیک</span>
+                                </div>
+                            </div>
+                            <div class="glass-card p-6">
+                                <h4 class="text-xl font-bold text-yellow-400 mb-4">درآمد</h4>
+                                <div class="h-32 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center">
+                                    <span class="text-white font-bold">نمودار درآمد</span>
+                                </div>
+                            </div>
+                            <div class="glass-card p-6">
+                                <h4 class="text-xl font-bold text-purple-400 mb-4">دسته‌بندی‌های محبوب</h4>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-300">بازی</span>
+                                        <span class="text-purple-400">۳۵٪</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-300">هنر هوش مصنوعی</span>
+                                        <span class="text-purple-400">۲۸٪</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-300">طبیعت</span>
+                                        <span class="text-purple-400">۲۲٪</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-300">فضا</span>
+                                        <span class="text-purple-400">۱۵٪</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="glass-card p-6">
+                                <h4 class="text-xl font-bold text-blue-400 mb-4">فعالیت کاربران</h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-300">کاربران فعال روزانه</span>
+                                        <span class="text-blue-400">۲,۸۴۷</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-300">ثبت‌نام‌های جدید</span>
+                                        <span class="text-blue-400">۱۵۶</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-300">میانگین زمان جلسه</span>
+                                        <span class="text-blue-400">۱۲ دقیقه ۳۴ ثانیه</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'settings':
+                    content.innerHTML = `
+                        <div class="flex justify-between items-center mb-6 persian-font">
+                            <h3 class="text-2xl font-bold text-white">تنظیمات سیستم</h3>
+                            <button onclick="refreshSettings()" class="cyber-button px-4 py-2 rounded-lg bg-green-600">
+                                <i class="fas fa-sync-alt mr-2"></i>بروزرسانی
+                            </button>
+                        </div>
+                        
+                        <div class="space-y-6 persian-font">
+                            <div class="glass-card p-6">
+                                <h4 class="text-xl font-bold text-cyan-400 mb-4">تنظیمات عمومی</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-gray-300 mb-2">نام سایت</label>
+                                        <input type="text" value="WallpaperVerse Pro" class="search-input px-4 py-3 rounded-lg w-full">
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-300 mb-2">حداکثر والپیپر در هر صفحه</label>
+                                        <input type="number" value="30" class="search-input px-4 py-3 rounded-lg w-full">
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-300 mb-2">فاصله تولید خودکار (ثانیه)</label>
+                                        <input type="number" value="30" class="search-input px-4 py-3 rounded-lg w-full">
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-300 mb-2">کیفیت پیش‌فرض</label>
+                                        <select class="search-input px-4 py-3 rounded-lg w-full">
+                                            <option value="4K">4K پریمیوم</option>
+                                            <option value="8K">8K فوق العاده</option>
+                                            <option value="2K">2K HD</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="glass-card p-6">
+                                <h4 class="text-xl font-bold text-pink-400 mb-4">تنظیمات تبلیغات</h4>
+                                <div class="space-y-4">
+                                    <label class="flex items-center space-x-2 text-gray-300">
+                                        <input type="checkbox" checked class="rounded">
+                                        <span>فعال‌سازی تبلیغات</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 text-gray-300">
+                                        <input type="checkbox" checked class="rounded">
+                                        <span>انقضای خودکار تبلیغات</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 text-gray-300">
+                                        <input type="checkbox" class="rounded">
+                                        <span>کاربران پریمیوم تبلیغ نمی‌بینند</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="glass-card p-6">
+                                <h4 class="text-xl font-bold text-green-400 mb-4">تنظیمات کاربران</h4>
+                                <div class="space-y-4">
+                                    <label class="flex items-center space-x-2 text-gray-300">
+                                        <input type="checkbox" checked class="rounded">
+                                        <span>اجازه ثبت‌نام کاربران</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 text-gray-300">
+                                        <input type="checkbox" checked class="rounded">
+                                        <span>تأیید ایمیل الزامی</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 text-gray-300">
+                                        <input type="checkbox" class="rounded">
+                                        <span>بررسی آپلودهای کاربران</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button onclick="saveSettings()" class="cyber-button px-8 py-3 rounded-lg text-lg">
+                                    <i class="fas fa-save mr-2"></i>ذخیره تمام تنظیمات
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+
+        // Admin Functions
+        function refreshWallpapers() {
+            showNotification('🔄 Refreshing wallpapers...', 'info');
+            setTimeout(() => {
+                showAdminTab('wallpapers');
+                showNotification('✅ Wallpapers refreshed!', 'success');
+            }, 1000);
+        }
+
+        function refreshAds() {
+            showNotification('🔄 Refreshing advertisements...', 'info');
+            setTimeout(() => {
+                showAdminTab('ads');
+                showNotification('✅ Advertisements refreshed!', 'success');
+            }, 1000);
+        }
+
+        function refreshUsers() {
+            showNotification('🔄 Refreshing users...', 'info');
+            setTimeout(() => {
+                showAdminTab('users');
+                showNotification('✅ Users refreshed!', 'success');
+            }, 1000);
+        }
+
+        function refreshAnalytics() {
+            showNotification('🔄 Refreshing analytics...', 'info');
+            setTimeout(() => {
+                showAdminTab('analytics');
+                showNotification('✅ Analytics refreshed!', 'success');
+            }, 1000);
+        }
+
+        function refreshSettings() {
+            showNotification('🔄 Refreshing settings...', 'info');
+            setTimeout(() => {
+                showAdminTab('settings');
+                showNotification('✅ Settings refreshed!', 'success');
+            }, 1000);
+        }
+
+        function showAddWallpaperForm() {
+            document.getElementById('addWallpaperForm').classList.remove('hidden');
+        }
+
+        function hideAddWallpaperForm() {
+            document.getElementById('addWallpaperForm').classList.add('hidden');
+        }
+
+        function saveWallpaper() {
+            const title = document.getElementById('wallpaperTitle').value.trim();
+            const url = document.getElementById('wallpaperUrl').value.trim();
+            const category = document.getElementById('wallpaperCategory').value;
+            const quality = document.getElementById('wallpaperQuality').value;
+            
+            if (!title || !url) {
+                showNotification('❌ Please fill in title and URL!', 'error');
+                return;
+            }
+            
+            const newWallpaper = {
+                id: Date.now(),
+                title: title,
+                category: category,
+                quality: quality,
+                url: url,
+                downloads: 0,
+                likes: 0,
+                views: 0,
+                isAI: false,
+                isPremium: false,
+                isAnimated: false,
+                uploadDate: new Date().toLocaleDateString(),
+                tags: [category, quality, 'admin-added'],
+                createdAt: Date.now()
+            };
+            
+            wallpapers.push(newWallpaper);
+            updateStats();
+            hideAddWallpaperForm();
+            showAdminTab('wallpapers');
+            showNotification('✅ Wallpaper added successfully!', 'success');
+        }
+
+        function showAddAdForm() {
+            document.getElementById('addAdForm').classList.remove('hidden');
+        }
+
+        function hideAddAdForm() {
+            document.getElementById('addAdForm').classList.add('hidden');
+        }
+
+        function saveAd() {
+            const title = document.getElementById('adTitle').value.trim();
+            const url = document.getElementById('adUrl').value.trim();
+            const imageFile = document.getElementById('adImageFile').files[0];
+            const imageUrl = document.getElementById('adImageUrl').value.trim();
+            const duration = parseInt(document.getElementById('adDuration').value);
+            const position = document.getElementById('adPosition').value;
+            const description = document.getElementById('adDescription').value.trim();
+            if (!title || !url || (!imageFile && !imageUrl)) {
+                showNotification('❌ Please fill in all required fields!', 'error');
+                return;
+            }
+            
+            let finalImageUrl = imageUrl;
+            
+            if (imageFile) {
+                // Convert file to base64 for demo purposes
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    finalImageUrl = e.target.result;
+                    createAd(title, url, finalImageUrl, duration, position, description);
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                createAd(title, url, finalImageUrl, duration, position, description);
+            }
+        }
+
+        function togglePopupTiming() {
+            const position = document.getElementById('adPosition').value;
+            const popupSection = document.getElementById('popupTimingSection');
+            
+            if (position === 'popup') {
+                popupSection.classList.remove('hidden');
+            } else {
+                popupSection.classList.add('hidden');
+            }
+        }
+
+        function createAd(title, url, image, duration, position, description) {
+            const popupDisplayTime = position === 'popup' ? parseInt(document.getElementById('popupDisplayTime').value) : 15;
+            const startDelay = parseInt(document.getElementById('adStartDelay').value) || 5;
+            const repeatInterval = parseInt(document.getElementById('adRepeatInterval').value) || 3;
+            
+            const newAd = {
+                id: Date.now().toString(),
+                title: title,
+                url: url,
+                image: image,
+                duration: duration,
+                position: position,
+                description: description,
+                popupDisplayTime: popupDisplayTime,
+                startDelay: startDelay,
+                repeatInterval: repeatInterval,
+                status: 'active',
+                createdAt: new Date().toLocaleDateString(),
+                expiryTime: Date.now() + (duration * 60 * 1000),
+                clicks: 0
+            };
+            
+            advertisements.push(newAd);
+            saveAds();
+            hideAddAdForm();
+            showAdminTab('ads');
+            
+            showNotification(`✅ تبلیغ ایجاد شد! شروع: ${startDelay}ثانیه، تکرار: ${repeatInterval}دقیقه`, 'success');
+            
+            // Restart all ad timers
+            adTimers.forEach((timer, adId) => {
+                clearTimeout(timer.initialTimer);
+                if (timer.repeatTimer) clearInterval(timer.repeatTimer);
+            });
+            adTimers.clear();
+            
+            // Start ad timers
+            setTimeout(() => {
+                displayAds();
+            }, 1000);
+        }
+
+        function changeUserRole(userId) {
+            const user = users.find(u => u.id == userId);
+            if (!user) return;
+            
+            const newRole = user.role === 'admin' ? 'user' : 'admin';
+            const confirmMessage = `نقش ${user.name} از ${user.role === 'admin' ? 'مدیر' : 'کاربر'} به ${newRole === 'admin' ? 'مدیر' : 'کاربر'} تغییر یابد؟`;
+            
+            if (confirm(confirmMessage)) {
+                user.role = newRole;
+                saveUsers();
+                showAdminTab('users');
+                showNotification(`✅ نقش ${user.name} به ${newRole === 'admin' ? 'مدیر' : 'کاربر'} تغییر یافت!`, 'success');
+            }
+        }
+
+        function editUser(userId) {
+            const user = users.find(u => u.id == userId);
+            if (!user) return;
+            
+            const newName = prompt('نام جدید را وارد کنید:', user.name);
+            if (newName && newName.trim()) {
+                user.name = newName.trim();
+                saveUsers();
+                showAdminTab('users');
+                showNotification('✅ کاربر با موفقیت بروزرسانی شد!', 'success');
+            }
+        }
+
+        function deleteUser(userId) {
+            const user = users.find(u => u.id == userId);
+            if (!user) return;
+            
+            if (confirm(`آیا مطمئن هستید که می‌خواهید ${user.name} را حذف کنید؟`)) {
+                users = users.filter(u => u.id != userId);
+                saveUsers();
+                showAdminTab('users');
+                showNotification('✅ کاربر با موفقیت حذف شد!', 'success');
+            }
+        }
+
+        function editAd(adId) {
+            const ad = advertisements.find(a => a.id === adId);
+            if (!ad) return;
+            
+            // Show edit form
+            const content = document.getElementById('adminContent');
+            content.innerHTML = `
+                <div class="glass-card p-6 persian-font">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold neon-text">ویرایش تبلیغ</h3>
+                        <button onclick="showAdminTab('ads')" class="cyber-button px-4 py-2 rounded-lg bg-gray-600">
+                            <i class="fas fa-arrow-right mr-2"></i>بازگشت
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" id="editAdTitle" value="${ad.title}" placeholder="عنوان تبلیغ" class="search-input px-4 py-3 rounded-lg">
+                        <input type="url" id="editAdUrl" value="${ad.url}" placeholder="آدرس تبلیغ" class="search-input px-4 py-3 rounded-lg">
+                        <input type="url" id="editAdImageUrl" value="${ad.image}" placeholder="آدرس تصویر" class="search-input px-4 py-3 rounded-lg">
+                        <select id="editAdDuration" class="search-input px-4 py-3 rounded-lg">
+                            <option value="1" ${ad.duration === 1 ? 'selected' : ''}>۱ دقیقه</option>
+                            <option value="5" ${ad.duration === 5 ? 'selected' : ''}>۵ دقیقه</option>
+                            <option value="30" ${ad.duration === 30 ? 'selected' : ''}>۳۰ دقیقه</option>
+                            <option value="60" ${ad.duration === 60 ? 'selected' : ''}>۱ ساعت</option>
+                            <option value="360" ${ad.duration === 360 ? 'selected' : ''}>۶ ساعت</option>
+                            <option value="720" ${ad.duration === 720 ? 'selected' : ''}>۱۲ ساعت</option>
+                            <option value="1440" ${ad.duration === 1440 ? 'selected' : ''}>۱ روز</option>
+                            <option value="10080" ${ad.duration === 10080 ? 'selected' : ''}>۱ هفته</option>
+                            <option value="43200" ${ad.duration === 43200 ? 'selected' : ''}>۱ ماه</option>
+                        </select>
+                        <select id="editAdPosition" class="search-input px-4 py-3 rounded-lg">
+                            <option value="header" ${ad.position === 'header' ? 'selected' : ''}>بالای صفحه</option>
+                            <option value="sidebar" ${ad.position === 'sidebar' ? 'selected' : ''}>کنار صفحه</option>
+                            <option value="footer" ${ad.position === 'footer' ? 'selected' : ''}>پایین صفحه</option>
+                            <option value="between" ${ad.position === 'between' ? 'selected' : ''}>بین والپیپرها</option>
+                            <option value="popup" ${ad.position === 'popup' ? 'selected' : ''}>پاپ آپ</option>
+                            <option value="banner" ${ad.position === 'banner' ? 'selected' : ''}>بنر</option>
+                        </select>
+                        <div>
+                            <label class="block text-gray-300 mb-2">زمان شروع نمایش (ثانیه)</label>
+                            <input type="number" id="editAdStartDelay" value="${ad.startDelay || 5}" min="1" max="300" class="search-input px-4 py-3 rounded-lg w-full">
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-2">فاصله تکرار (دقیقه)</label>
+                            <input type="number" id="editAdRepeatInterval" value="${ad.repeatInterval || 3}" min="1" max="60" class="search-input px-4 py-3 rounded-lg w-full">
+                        </div>
+                        <textarea id="editAdDescription" placeholder="توضیحات تبلیغ" class="search-input px-4 py-3 rounded-lg h-20 md:col-span-2">${ad.description || ''}</textarea>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <img src="${ad.image}" alt="${ad.title}" class="w-32 h-32 object-cover rounded-lg mb-4">
+                    </div>
+                    
+                    <div class="flex space-x-4 mt-6">
+                        <button onclick="updateAd('${ad.id}')" class="cyber-button px-6 py-3 rounded-lg">
+                            <i class="fas fa-save mr-2"></i>ذخیره تغییرات
+                        </button>
+                        <button onclick="showAdminTab('ads')" class="cyber-button px-6 py-3 rounded-lg bg-gray-600">
+                            <i class="fas fa-times mr-2"></i>لغو
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateAd(adId) {
+            const ad = advertisements.find(a => a.id === adId);
+            if (!ad) return;
+            
+            const title = document.getElementById('editAdTitle').value.trim();
+            const url = document.getElementById('editAdUrl').value.trim();
+            const image = document.getElementById('editAdImageUrl').value.trim();
+            const duration = parseInt(document.getElementById('editAdDuration').value);
+            const position = document.getElementById('editAdPosition').value;
+            const description = document.getElementById('editAdDescription').value.trim();
+            const startDelay = parseInt(document.getElementById('editAdStartDelay').value) || 5;
+            const repeatInterval = parseInt(document.getElementById('editAdRepeatInterval').value) || 3;
+            
+            if (!title || !url || !image) {
+                showNotification('❌ لطفاً تمام فیلدهای ضروری را پر کنید!', 'error');
+                return;
+            }
+            
+            ad.title = title;
+            ad.url = url;
+            ad.image = image;
+            ad.duration = duration;
+            ad.position = position;
+            ad.description = description;
+            ad.startDelay = startDelay;
+            ad.repeatInterval = repeatInterval;
+            ad.expiryTime = Date.now() + (duration * 60 * 1000); // Reset expiry time
+            
+            saveAds();
+            showAdminTab('ads');
+            showNotification(`✅ تبلیغ بروزرسانی شد! شروع: ${startDelay}ثانیه، تکرار: ${repeatInterval}دقیقه`, 'success');
+            
+            // Restart ad timers
+            adTimers.forEach((timer, adId) => {
+                clearTimeout(timer.initialTimer);
+                if (timer.repeatTimer) clearInterval(timer.repeatTimer);
+            });
+            adTimers.clear();
+            
+            setTimeout(() => {
+                displayAds();
+            }, 1000);
+        }
+
+        function toggleAdStatus(adId) {
+            const ad = advertisements.find(a => a.id === adId);
+            if (ad) {
+                ad.status = ad.status === 'active' ? 'inactive' : 'active';
+                saveAds();
+                showAdminTab('ads');
+                showNotification(`✅ تبلیغ ${ad.status === 'active' ? 'فعال' : 'غیرفعال'} شد!`, 'success');
+            }
+        }
+
+        function deleteAd(adId) {
+            if (confirm('آیا مطمئن هستید که می‌خواهید این تبلیغ را حذف کنید؟')) {
+                advertisements = advertisements.filter(a => a.id !== adId);
+                saveAds();
+                showAdminTab('ads');
+                showNotification('✅ تبلیغ حذف شد!', 'success');
+            }
+        }
+
+        // Auto-expire ads system
+        function checkExpiredAds() {
+            const now = Date.now();
+            const expiredAds = advertisements.filter(ad => ad.expiryTime && ad.expiryTime <= now);
+            
+            if (expiredAds.length > 0) {
+                advertisements = advertisements.filter(ad => !ad.expiryTime || ad.expiryTime > now);
+                saveAds();
+                showNotification(`🗑️ ${expiredAds.length} تبلیغ منقضی شده حذف شد`, 'info');
+            }
+        }
+
+        // Global variables for ad management
+        let adTimers = new Map(); // Store individual ad timers
+
+        // Display ads with individual timing system
+        function displayAds() {
+            const activeAds = advertisements.filter(ad => ad.status === 'active' && (!ad.expiryTime || ad.expiryTime > Date.now()));
+            
+            if (activeAds.length === 0) return;
+            
+            // Start individual timers for each ad
+            activeAds.forEach(ad => {
+                if (!adTimers.has(ad.id)) {
+                    startIndividualAdTimer(ad);
+                }
+            });
+        }
+
+        // Start individual timer for each ad
+        function startIndividualAdTimer(ad) {
+            if (adTimers.has(ad.id)) {
+                clearTimeout(adTimers.get(ad.id).initialTimer);
+                clearInterval(adTimers.get(ad.id).repeatTimer);
+            }
+            
+            const startDelay = (ad.startDelay || 5) * 1000; // Convert to milliseconds
+            const repeatInterval = (ad.repeatInterval || 3) * 60 * 1000; // Convert to milliseconds
+            
+            // Initial display timer
+            const initialTimer = setTimeout(() => {
+                showIndividualAd(ad);
+                
+                // Set up repeat timer
+                const repeatTimer = setInterval(() => {
+                    // Check if ad is still active and not expired
+                    if (ad.status === 'active' && (!ad.expiryTime || ad.expiryTime > Date.now())) {
+                        showIndividualAd(ad);
+                    } else {
+                        // Clean up timer if ad is inactive or expired
+                        clearInterval(repeatTimer);
+                        adTimers.delete(ad.id);
+                    }
+                }, repeatInterval);
+                
+                adTimers.set(ad.id, { initialTimer, repeatTimer });
+            }, startDelay);
+            
+            adTimers.set(ad.id, { initialTimer, repeatTimer: null });
+        }
+
+        // Show individual ad based on its settings
+        function showIndividualAd(ad) {
+            let adElement;
+            
+            switch(ad.position) {
+                case 'between':
+                    // Check if this ad is already displayed in the grid
+                    if (document.querySelector(`[data-ad-id="${ad.id}"]`)) return;
+                    
+                    adElement = document.createElement('div');
+                    adElement.className = 'advertisement masonry-item';
+                    adElement.setAttribute('data-ad-id', ad.id);
+                    
+                    const randomHeight = Math.floor(Math.random() * 150) + 350;
+                    
+                    adElement.innerHTML = `
+                        <div class="ad-image-container" style="height: ${randomHeight}px;" onclick="window.open('${ad.url}', '_blank'); incrementAdClicks('${ad.id}')">
+                            <img src="${ad.image}" alt="${ad.title}" class="ad-image" loading="lazy">
+                            
+                            <!-- Close Button -->
+                            <button onclick="closeAd('${ad.id}'); event.stopPropagation();" class="ad-close-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            
+                            <!-- Shimmer Effect -->
+                            <div class="ad-shimmer"></div>
+                            
+                            <!-- Overlay -->
+                            <div class="ad-overlay"></div>
+                            
+                            <!-- Floating Ad Badge -->
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 hover:opacity-100 transition-all duration-300">
+                                <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-6 py-3 rounded-full font-bold cyber-font text-lg shadow-2xl">
+                                    ✨ ${ad.title} ✨
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    const grid = document.getElementById('wallpapersGrid');
+                    if (grid && grid.children.length > 5) {
+                        const randomIndex = Math.floor(Math.random() * (grid.children.length - 5)) + 5;
+                        grid.children[randomIndex].after(adElement);
+                    }
+                    return; // Don't auto-hide between ads
+                    
+                default:
+                    showTemporaryAd(ad);
+                    break;
+            }
+        }
+
+        function showTemporaryAd(ad) {
+            // Remove any existing temporary ad with same ID
+            const existingAd = document.querySelector(`[data-temp-ad-id="${ad.id}"]`);
+            if (existingAd) existingAd.remove();
+            
+            let adElement;
+            
+            switch(ad.position) {
+                case 'header':
+                    adElement = document.createElement('div');
+                    adElement.className = 'advertisement w-full mb-6 animate-slideInDown';
+                    adElement.setAttribute('data-temp-ad-id', ad.id);
+                    adElement.innerHTML = `
+                        <div class="ad-image-container h-32 cursor-pointer relative" onclick="window.open('${ad.url}', '_blank'); incrementAdClicks('${ad.id}')">
+                            <img src="${ad.image}" alt="${ad.title}" class="ad-image">
+                            
+                            <!-- Close Button -->
+                            <button onclick="closeTemporaryAd('${ad.id}'); event.stopPropagation();" class="ad-close-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            
+                            <!-- Shimmer Effect -->
+                            <div class="ad-shimmer"></div>
+                            
+                            <!-- Overlay -->
+                            <div class="ad-overlay"></div>
+                            
+                            <!-- Floating Title -->
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 hover:opacity-100 transition-all duration-300">
+                                <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-8 py-4 rounded-full font-bold cyber-font text-xl shadow-2xl">
+                                    🌟 ${ad.title} 🌟
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    const nav = document.querySelector('nav');
+                    if (nav) {
+                        const container = nav.nextElementSibling;
+                        if (container) {
+                            container.prepend(adElement);
+                        }
+                    }
+                    break;
+                    
+                case 'sidebar':
+                    adElement = document.createElement('div');
+                    adElement.className = 'advertisement fixed right-4 top-1/2 transform -translate-y-1/2 z-40 w-80 animate-slideInRight';
+                    adElement.setAttribute('data-temp-ad-id', ad.id);
+                    adElement.innerHTML = `
+                        <div class="ad-image-container h-96 cursor-pointer" onclick="window.open('${ad.url}', '_blank'); incrementAdClicks('${ad.id}')">
+                            <img src="${ad.image}" alt="${ad.title}" class="ad-image">
+                            
+                            <!-- Close Button -->
+                            <button onclick="closeTemporaryAd('${ad.id}'); event.stopPropagation();" class="ad-close-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            
+                            <!-- Shimmer Effect -->
+                            <div class="ad-shimmer"></div>
+                            
+                            <!-- Overlay -->
+                            <div class="ad-overlay"></div>
+                            
+                            <!-- Floating Title -->
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 hover:opacity-100 transition-all duration-300">
+                                <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-full font-bold cyber-font text-sm shadow-2xl">
+                                    ⭐ ${ad.title} ⭐
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(adElement);
+                    break;
+                    
+                case 'footer':
+                    adElement = document.createElement('div');
+                    adElement.className = 'advertisement w-full mt-12 animate-slideInUp';
+                    adElement.setAttribute('data-temp-ad-id', ad.id);
+                    adElement.innerHTML = `
+                        <div class="ad-image-container h-48 cursor-pointer" onclick="window.open('${ad.url}', '_blank'); incrementAdClicks('${ad.id}')">
+                            <img src="${ad.image}" alt="${ad.title}" class="ad-image">
+                            
+                            <!-- Close Button -->
+                            <button onclick="closeTemporaryAd('${ad.id}'); event.stopPropagation();" class="ad-close-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            
+                            <!-- Shimmer Effect -->
+                            <div class="ad-shimmer"></div>
+                            
+                            <!-- Overlay -->
+                            <div class="ad-overlay"></div>
+                            
+                            <!-- Floating Title -->
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 hover:opacity-100 transition-all duration-300">
+                                <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-8 py-4 rounded-full font-bold cyber-font text-2xl shadow-2xl">
+                                    🎯 ${ad.title} 🎯
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(adElement);
+                    break;
+                    
+                case 'banner':
+                    adElement = document.createElement('div');
+                    adElement.className = 'advertisement w-full animate-slideInDown';
+                    adElement.setAttribute('data-temp-ad-id', ad.id);
+                    adElement.innerHTML = `
+                        <div class="ad-image-container h-24 cursor-pointer" onclick="window.open('${ad.url}', '_blank'); incrementAdClicks('${ad.id}')">
+                            <img src="${ad.image}" alt="${ad.title}" class="ad-image">
+                            
+                            <!-- Close Button -->
+                            <button onclick="closeTemporaryAd('${ad.id}'); event.stopPropagation();" class="ad-close-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            
+                            <!-- Shimmer Effect -->
+                            <div class="ad-shimmer"></div>
+                            
+                            <!-- Overlay -->
+                            <div class="ad-overlay"></div>
+                            
+                            <!-- Floating Title -->
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 hover:opacity-100 transition-all duration-300">
+                                <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-6 py-2 rounded-full font-bold cyber-font text-lg shadow-2xl">
+                                    🚀 ${ad.title} 🚀
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    const mainApp = document.getElementById('mainApp');
+                    if (mainApp) mainApp.prepend(adElement);
+                    break;
+                    
+                case 'popup':
+                    showAdPopup(ad);
+                    return; // Don't set timeout for popup as it has its own close mechanism
+            }
+            
+            // Auto-hide after 15 seconds
+            setTimeout(() => {
+                closeTemporaryAd(ad.id);
+            }, 15000);
+        }
+
+        function closeTemporaryAd(adId) {
+            const adElement = document.querySelector(`[data-temp-ad-id="${adId}"]`);
+            if (adElement) {
+                adElement.style.animation = 'fadeOut 0.3s ease-out forwards';
+                setTimeout(() => {
+                    if (adElement.parentNode) {
+                        adElement.remove();
+                    }
+                }, 300);
+            }
+        }
+
+        function closeAd(adId) {
+            const adElement = document.querySelector(`[data-ad-id="${adId}"]`);
+            if (adElement) {
+                adElement.style.animation = 'fadeOut 0.3s ease-out forwards';
+                setTimeout(() => {
+                    if (adElement.parentNode) {
+                        adElement.remove();
+                    }
+                }, 300);
+            }
+        }
+        
+        function incrementAdClicks(adId) {
+            const ad = advertisements.find(a => a.id === adId);
+            if (ad) {
+                ad.clicks = (ad.clicks || 0) + 1;
+                saveAds();
+            }
+        }
+
+        function showAdPopup(ad) {
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 modal flex items-center justify-center z-50';
+            popup.innerHTML = `
+                <div class="max-w-lg w-full mx-4 relative">
+                    <div class="ad-image-container h-96 cursor-pointer" onclick="window.open('${ad.url}', '_blank'); incrementAdClicks('${ad.id}'); document.body.removeChild(this.closest('.modal'));">
+                        <img src="${ad.image}" alt="${ad.title}" class="ad-image">
+                        
+                        <!-- Close Button -->
+                        <button onclick="document.body.removeChild(this.closest('.modal')); event.stopPropagation();" class="ad-close-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        
+                        <!-- Shimmer Effect -->
+                        <div class="ad-shimmer"></div>
+                        
+                        <!-- Overlay -->
+                        <div class="ad-overlay"></div>
+                        
+                        <!-- Floating Title -->
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 hover:opacity-100 transition-all duration-300">
+                            <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-6 py-3 rounded-full font-bold cyber-font text-lg shadow-2xl">
+                                💎 ${ad.title} 💎
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Info -->
+                        <div class="absolute bottom-4 left-4 right-4 text-center opacity-0 hover:opacity-100 transition-all duration-300">
+                            <div class="bg-black/70 backdrop-blur-sm rounded-lg p-3">
+                                <p class="text-white text-sm persian-font">${ad.description || 'کلیک کنید تا مشاهده کنید'}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(popup);
+            
+            // Auto-close popup after specified time
+            const displayTime = (ad.popupDisplayTime || 15) * 1000;
+            setTimeout(() => {
+                if (document.body.contains(popup)) {
+                    popup.style.animation = 'fadeOut 0.5s ease-out forwards';
+                    setTimeout(() => {
+                        if (document.body.contains(popup)) {
+                            document.body.removeChild(popup);
+                        }
+                    }, 500);
+                }
+            }, displayTime);
+        }
+
+        function loadAds() {
+            const savedAds = localStorage.getItem('wallpaperverse_ads');
+            if (savedAds) {
+                advertisements = JSON.parse(savedAds);
+            }
+        }
+
+        function saveAds() {
+            localStorage.setItem('wallpaperverse_ads', JSON.stringify(advertisements));
+        }
+
+        function saveSettings() {
+            showNotification('✅ Settings saved successfully!', 'success');
+        }
+
+        function generateBulkWallpapers() {
+            if (!isAdmin) {
+                showNotification('❌ Admin access required!', 'error');
+                return;
+            }
+            
+            showNotification('🚀 Generating 50 premium wallpapers...', 'info');
+            
+            setTimeout(() => {
+                for (let i = 0; i < 50; i++) {
+                    const wallpaper = generateUniqueWallpaper();
+                    wallpapers.push(wallpaper);
+                }
+                
+                updateStats();
+                updateAdminStats();
+                showAdminTab('wallpapers');
+                showNotification('✅ 50 premium wallpapers generated successfully!', 'success');
+            }, 2000);
+        }
+
+        // Notification System
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            
+            const colors = {
+                success: 'from-green-400 to-green-600',
+                error: 'from-red-400 to-red-600',
+                info: 'from-cyan-400 to-pink-500',
+                warning: 'from-yellow-400 to-orange-500'
+            };
+            
+            const icons = {
+                success: 'fas fa-check-circle',
+                error: 'fas fa-exclamation-circle',
+                info: 'fas fa-info-circle',
+                warning: 'fas fa-exclamation-triangle'
+            };
+            
+            notification.style.background = `linear-gradient(45deg, ${colors[type] || colors.info})`;
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="${icons[type] || icons.info} mr-3 text-xl"></i>
+                    <span class="font-medium">${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 4000);
+        }
+
+        // Auto-generate wallpapers every 60 seconds
+        setInterval(() => {
+            if (wallpapers.length < 100) {
+                const newWallpaper = generateUniqueWallpaper();
+                wallpapers.push(newWallpaper);
+                
+                if (!document.getElementById('mainApp').classList.contains('hidden')) {
+                    addWallpaperToGrid(newWallpaper);
+                    updateStats();
+                }
+            }
+        }, 60000);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96d74b2657f52c3a',t:'MTc1NDkxMDcwMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
